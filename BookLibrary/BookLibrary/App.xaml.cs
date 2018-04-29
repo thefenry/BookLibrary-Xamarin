@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,9 @@ namespace BookLibrary
 		{
 			InitializeComponent();
 
-			MainPage = new BookLibrary.MainPage();
-		}
+            MainPage = new BookLibrary.BookList();
+
+        }
 
 		protected override void OnStart ()
 		{
