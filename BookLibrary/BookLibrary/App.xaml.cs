@@ -14,7 +14,7 @@ namespace BookLibrary
 		{
 			InitializeComponent();
 
-            MainPage = new BookLibrary.BookList();
+            MainPage = new BookLibrary.MainTabPage();
 
         }
 
