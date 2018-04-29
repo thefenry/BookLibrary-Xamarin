@@ -1,4 +1,6 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Helpers;
+using BookLibrary.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,11 +17,14 @@ namespace BookLibrary
     {
         public ObservableCollection<Book> Books { get; set; }
 
+        private string bookFileName = "mybooks.json";
+
         public BookList()
         {
             InitializeComponent();
 
-            ObservableCollection<Book> Books = new ObservableCollection<Book>
+
+            Books = new ObservableCollection<Book>
             {
                 new Book
                 {
@@ -32,8 +37,13 @@ namespace BookLibrary
                     Author = "Douglas Adams"
                 }
             };
-            			
-			MyListView.ItemsSource = Books;
+
+            string content = JsonConvert.SerializeObject(Books);
+
+            bookFileName.WriteFileAsync(content);
+
+            MyListView.ItemsSource = Books;
+
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
