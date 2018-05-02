@@ -9,7 +9,7 @@
             <local:BookList />
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="MainPage">
+    <NavigationPage Title="Main Page">
         <x:Arguments>
             <local:MainPage />
         </x:Arguments>

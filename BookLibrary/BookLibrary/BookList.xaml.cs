@@ -1,5 +1,6 @@
 ﻿using BookLibrary.Helpers;
 using BookLibrary.Models;
+using BookLibrary.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
@@ -15,34 +16,15 @@ namespace BookLibrary
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookList : ContentPage
     {
-        public ObservableCollection<Book> Books { get; set; }
 
-        private string bookFileName = "mybooks.json";
+        BooksViewModel booksViewModel;
+        //private string bookFileName = "mybooks.json";
 
         public BookList()
         {
             InitializeComponent();
 
-
-            Books = new ObservableCollection<Book>
-            {
-                new Book
-                {
-                    Title = "Pride & Prejudice",
-                    Author = "Jane Austen"
-                },
-                new Book
-                {
-                    Title = "Hitchhickers Guide to the Galaxy",
-                    Author = "Douglas Adams"
-                }
-            };
-
-            string content = JsonConvert.SerializeObject(Books);
-
-            bookFileName.WriteFileAsync(content);
-
-            MyListView.ItemsSource = Books;
+            BindingContext = booksViewModel = new BooksViewModel();
 
         }
 
@@ -55,6 +37,21 @@ namespace BookLibrary
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
+        }
+
+        async void AddItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (booksViewModel.Books.Count == 0)
+                booksViewModel.LoadBooksCommand.Execute(null);
+
+
         }
     }
 }
