@@ -38,17 +38,6 @@ namespace BookLibrary.ViewModels
                     Books.Add(_book);
 
                     await App.Database.SaveBookAsync(_book);
-
-                    //var bookLibrary = await bookFileName.ReadAllTextAsync();
-
-                    //ObservableCollection<Book> books
-                    //    = JsonConvert.DeserializeObject<ObservableCollection<Book>>(bookLibrary);
-
-                    //books.Add(book);
-
-                    //string content = JsonConvert.SerializeObject(books);
-
-                    //await bookFileName.WriteFileAsync(content);
                 }
             });
 
@@ -65,10 +54,7 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                var books = await App.Database.GetBooksAsync();// bookFileName.ReadAllTextAsync();
-
-
-                //var books = JsonConvert.DeserializeObject<ObservableCollection<Book>>(bookLibrary);
+                var books = await App.Database.GetBooksAsync();
 
                 foreach (var book in books)
                 {

@@ -1,12 +1,6 @@
-﻿using BookLibrary.Helpers;
-using BookLibrary.Models;
+﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
-using Newtonsoft.Json;
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,29 +10,27 @@ namespace BookLibrary
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookList : ContentPage
     {
-
         BooksViewModel booksViewModel;
-        //private string bookFileName = "mybooks.json";
 
         public BookList()
         {
             InitializeComponent();
 
             BindingContext = booksViewModel = new BooksViewModel();
-
         }
-
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+              
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            if (e.Item == null)
+            var item = args.SelectedItem as Book;
+            if (item == null)
                 return;
 
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
+            await Navigation.PushAsync(new BookDetailPage(new BookDetailViewModel(item)));
 
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+            // Manually deselect item.
+            BooksListView.SelectedItem = null;
         }
-
+        
         async void AddItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
