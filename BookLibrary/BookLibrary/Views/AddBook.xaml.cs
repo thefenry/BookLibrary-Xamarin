@@ -4,7 +4,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace BookLibrary
+namespace BookLibrary.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddBook : ContentPage
@@ -24,7 +24,6 @@ namespace BookLibrary
         {
             MessagingCenter.Send(this, "AddOrUpdateBook", Book);
             await Navigation.PopModalAsync();
-
         }
 
     }

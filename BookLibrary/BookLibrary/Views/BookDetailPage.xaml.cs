@@ -1,10 +1,11 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace BookLibrary
+namespace BookLibrary.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BookDetailPage : ContentPage
@@ -23,6 +24,12 @@ namespace BookLibrary
         async void EditItem_Clicked(object sender, EventArgs args)
         {
             await Navigation.PushModalAsync(new NavigationPage(new AddBook(this._book.Book)));
+        }
+
+        async Task DeleteItem_Clicked(object sender, EventArgs args)
+        {
+            await App.Database.DeleteBookAsync(this._book.Book);
+            await Navigation.PopToRootAsync();
         }
 
         protected override void OnAppearing()

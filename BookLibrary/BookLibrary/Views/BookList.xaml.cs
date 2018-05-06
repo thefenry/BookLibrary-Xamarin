@@ -5,7 +5,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace BookLibrary
+namespace BookLibrary.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookList : ContentPage
@@ -18,19 +18,19 @@ namespace BookLibrary
 
             BindingContext = booksViewModel = new BooksViewModel();
         }
-              
+
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var item = args.SelectedItem as Book;
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new BookDetailPage(new BookDetailViewModel(item)));
+            await Navigation.PushAsync(new BookDetailPage(item));
 
             // Manually deselect item.
             BooksListView.SelectedItem = null;
         }
-        
+
         async void AddItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
@@ -40,10 +40,7 @@ namespace BookLibrary
         {
             base.OnAppearing();
 
-            if (booksViewModel.Books.Count == 0)
-                booksViewModel.LoadBooksCommand.Execute(null);
-
-
+            booksViewModel.LoadBooksCommand.Execute(null);
         }
     }
 }

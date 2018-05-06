@@ -21,13 +21,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="AddBook.xaml">
+    <EmbeddedResource Update="Views\AddBook.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="BookDetailPage.xaml">
+    <EmbeddedResource Update="Views\BookDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="BookList.xaml">
+    <EmbeddedResource Update="Views\BookList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="MainTabPage.xaml">
