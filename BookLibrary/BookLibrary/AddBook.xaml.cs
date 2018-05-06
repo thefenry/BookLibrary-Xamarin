@@ -1,12 +1,5 @@
-﻿using BookLibrary.Helpers;
-using BookLibrary.Models;
-using Newtonsoft.Json;
+﻿using BookLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,18 +11,18 @@ namespace BookLibrary
     {
         public Book Book { get; set; }
 
-        public AddBook()
+        public AddBook(Book book = null)
         {
             InitializeComponent();
 
-            Book = new Book();
+            Book = book == null ? new Book() : book;
 
             BindingContext = this;
         }
 
         async void OnCreateClicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddBook", Book);
+            MessagingCenter.Send(this, "AddOrUpdateBook", Book);
             await Navigation.PopModalAsync();
 
         }

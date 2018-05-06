@@ -9,9 +9,9 @@
             <local:BookList />
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="Main Page">
+    <!--<NavigationPage Title="Main Page">
         <x:Arguments>
             <local:MainPage />
         </x:Arguments>
-    </NavigationPage>
+    </NavigationPage>-->
 </TabbedPage>
