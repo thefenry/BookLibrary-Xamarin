@@ -7,8 +7,8 @@
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
 
-
-        <ListView x:Name="BooksListView" 
+   
+    <ListView x:Name="BooksListView" 
                 ItemsSource="{Binding Books}"
                 VerticalOptions="FillAndExpand"
                  HasUnevenRows="true"
@@ -18,9 +18,9 @@
                  CachingStrategy="RecycleElement"
                   ItemSelected="OnItemSelected"
                   >
-                 <!--ItemSelected="OnItemSelected"-->
+        <!--ItemSelected="OnItemSelected"-->
 
-            <ListView.ItemTemplate>
+        <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <StackLayout>
