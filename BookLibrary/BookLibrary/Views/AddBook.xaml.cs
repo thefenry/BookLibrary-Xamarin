@@ -26,5 +26,25 @@ namespace BookLibrary.Views
             await Navigation.PopModalAsync();
         }
 
+        async void OnScan_Clicked(object sender, EventArgs eventArgs)
+        {
+            try
+            {
+                var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+
+                var result = await scanner.Scan();
+
+                if (result != null)
+                    Console.WriteLine("Scanned Barcode: " + result.Text);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
     }
 }

@@ -32,7 +32,7 @@ namespace BookLibrary.Views
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
-        {
+        {           
             await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
         }
 
