@@ -13,7 +13,17 @@ namespace BookLibrary.ViewModels
 {
     public class BooksViewModel: BaseViewModel
     {
-        public ObservableCollection<Book> Books { get; set; }
+
+        private ObservableCollection<Book> _books;
+        public ObservableCollection<Book> Books
+        {
+            get { return _books; }
+            set
+            {
+                _books = value;
+                RaisePropertyChanged("Books");
+            }
+        }
 
         public Command LoadBooksCommand { get; set; }
 
@@ -31,6 +41,8 @@ namespace BookLibrary.ViewModels
                     var _book = book as Book;
 
                     await App.Database.SaveBookAsync(_book);
+
+                    Books.Add(_book);
                 }
             });
 
