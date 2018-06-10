@@ -9,8 +9,6 @@ namespace BookLibrary.ViewModels
 {
     public class BookDetailViewModel : BaseViewModel
     {
-        //public Book Book { get; set; }
-
         Book book;
         public Book Book
         {
@@ -25,11 +23,11 @@ namespace BookLibrary.ViewModels
         {
             Book = book;
 
-            MessagingCenter.Subscribe<AddBook, Book>(this, "AddOrUpdateBook", async (obj, bookUpdate) =>
+            MessagingCenter.Subscribe<AddBook, Book>(this, "AddOrUpdateBook", (obj, bookUpdate) =>
             {
                 if (bookUpdate != null)
                 {
-                    Book = bookUpdate as Book;              
+                    Book = bookUpdate as Book;
                 }
             });
         }
