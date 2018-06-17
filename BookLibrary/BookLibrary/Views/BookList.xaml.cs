@@ -1,7 +1,7 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
 using System;
-
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -41,6 +41,28 @@ namespace BookLibrary.Views
             base.OnAppearing();
 
             booksViewModel.LoadBooksCommand.Execute(null);
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //thats all you need to make a search  
+            string searchText = e.NewTextValue;
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                booksViewModel.LoadBooksCommand.Execute(null);
+
+                //list.ItemsSource = tempdata;
+            }
+
+            else
+            {
+                booksViewModel.SearchText = searchText;
+                booksViewModel.SearchBooksCommand.Execute(null);
+                 //booksViewModel.Books.Where(x => x.Title.Contains(searchText) || x.Author.Contains(searchText));
+
+                //list.ItemsSource = tempdata.Where(x => x.Name.StartsWith(e.NewTextValue));
+            }
         }
     }
 }
