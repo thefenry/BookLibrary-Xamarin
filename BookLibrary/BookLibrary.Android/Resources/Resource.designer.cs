@@ -29,6 +29,9 @@ namespace BookLibrary.Droid
 			global::PCLStorage.Resource.String.ApplicationName = global::BookLibrary.Droid.Resource.String.ApplicationName;
 			global::PCLStorage.Resource.String.Hello = global::BookLibrary.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::BookLibrary.Droid.Resource.Attribute.actionBarSize;
+			global::ZXing.Mobile.Resource.Id.contentFrame = global::BookLibrary.Droid.Resource.Id.contentFrame;
+			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::BookLibrary.Droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::BookLibrary.Droid.Resource.Layout.zxingscannerfragmentlayout;
 		}
 		
 		public partial class Animation
@@ -2897,6 +2900,9 @@ namespace BookLibrary.Droid
 			// aapt resource value: 0x7f080075
 			public const int container = 2131230837;
 			
+			// aapt resource value: 0x7f0800b4
+			public const int contentFrame = 2131230900;
+			
 			// aapt resource value: 0x7f08004e
 			public const int contentPanel = 2131230798;
 			
@@ -3011,8 +3017,8 @@ namespace BookLibrary.Droid
 			// aapt resource value: 0x7f080048
 			public const int list_item = 2131230792;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int masked = 2131230901;
+			// aapt resource value: 0x7f0800b6
+			public const int masked = 2131230902;
 			
 			// aapt resource value: 0x7f0800a1
 			public const int media_actions = 2131230881;
@@ -3317,8 +3323,8 @@ namespace BookLibrary.Droid
 			// aapt resource value: 0x7f08000e
 			public const int view_offset_helper = 2131230734;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int visible = 2131230900;
+			// aapt resource value: 0x7f0800b5
+			public const int visible = 2131230901;
 			
 			// aapt resource value: 0x7f080093
 			public const int volume_item_container = 2131230867;
@@ -3613,6 +3619,12 @@ namespace BookLibrary.Droid
 			
 			// aapt resource value: 0x7f030043
 			public const int Toolbar = 2130903107;
+			
+			// aapt resource value: 0x7f030044
+			public const int zxingscanneractivitylayout = 2130903108;
+			
+			// aapt resource value: 0x7f030045
+			public const int zxingscannerfragmentlayout = 2130903109;
 			
 			static Layout()
 			{

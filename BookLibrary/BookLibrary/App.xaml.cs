@@ -16,8 +16,8 @@ namespace BookLibrary
             Resources = new ResourceDictionary();
             Resources.Add("primaryGreen", Color.FromHex("91CA47"));
             Resources.Add("primaryDarkGreen", Color.FromHex("6FA22E"));
-    
-            MainPage = new BookLibrary.MainTabPage();
+
+            MainPage = new NavigationPage(new BookLibrary.Views.BookList());//.MainTabPage();
 
         }
 

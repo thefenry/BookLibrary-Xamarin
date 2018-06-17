@@ -9,13 +9,13 @@ namespace BookLibrary.ViewModels
 {
     public class BookDetailViewModel : BaseViewModel
     {
-        //public Book Book { get; set; }
-
         Book book;
         public Book Book
         {
             get { return book; }
-            set { SetProperty(ref book, value); }
+            set {
+                book = value;
+                RaisePropertyChanged("Book"); }
         }
 
 
@@ -23,18 +23,13 @@ namespace BookLibrary.ViewModels
         {
             Book = book;
 
-            //MessagingCenter.Subscribe<AddBook, Book>(this, "AddOrUpdateBook", async (obj, bookUpdate) =>
-            //{
-            //    if (bookUpdate != null)
-            //    {
-
-            //        Book = bookUpdate as Book;
-
-            //        //Books.Add(_book);
-
-            //        //await App.Database.SaveBookAsync(_book);
-            //    }
-            //});
+            MessagingCenter.Subscribe<AddBook, Book>(this, "AddOrUpdateBook", (obj, bookUpdate) =>
+            {
+                if (bookUpdate != null)
+                {
+                    Book = bookUpdate as Book;
+                }
+            });
         }
     }
 }

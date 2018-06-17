@@ -42,6 +42,12 @@ namespace BookLibrary.DAL
             }
         }
 
+        public async Task<List<Book>> SearchBooksAsync(string searchText)
+        {
+            return await database.Table<Book>().Where(x => x.Title.ToLower().Contains(searchText.ToLower()) 
+            || x.Author.ToLower().Contains(searchText.ToLower())).ToListAsync();
+        }
+
         public Task<int> DeleteBookAsync(Book book)
         {
             return database.DeleteAsync(book);

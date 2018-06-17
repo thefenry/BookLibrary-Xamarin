@@ -7,7 +7,9 @@
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
 
-
+    <StackLayout Orientation="Vertical">
+        <SearchBar TextChanged="SearchBar_TextChanged"></SearchBar>
+        
         <ListView x:Name="BooksListView" 
                 ItemsSource="{Binding Books}"
                 VerticalOptions="FillAndExpand"
@@ -18,22 +20,21 @@
                  CachingStrategy="RecycleElement"
                   ItemSelected="OnItemSelected"
                   >
-                 <!--ItemSelected="OnItemSelected"-->
+            <!--ItemSelected="OnItemSelected"-->
 
             <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout>
-                        <Label Text="{Binding Title}" 
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Title}" 
                    Style="{DynamicResource ListItemTextStyle}" />
-                        <Label Text="{Binding Author}" 
+                            <Label Text="{Binding Author}" 
                    Style="{DynamicResource ListItemDetailTextStyle}"/>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-    </ListView>
-
-
+        </ListView>
+    </StackLayout>
 </ContentPage>

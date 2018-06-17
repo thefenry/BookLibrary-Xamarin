@@ -11,17 +11,34 @@ using Xamarin.Forms;
 
 namespace BookLibrary.ViewModels
 {
-    public class BooksViewModel: BaseViewModel
+    public class BooksViewModel : BaseViewModel
     {
-        public ObservableCollection<Book> Books { get; set; }
+
+        private ObservableCollection<Book> _books;
+
+        public string SearchText { get; set; }
+
+        public ObservableCollection<Book> Books
+        {
+            get { return _books; }
+            set
+            {
+                _books = value;
+                RaisePropertyChanged("Books");
+            }
+        }
 
         public Command LoadBooksCommand { get; set; }
+
+        public Command SearchBooksCommand { get; set; }
+
 
         public BooksViewModel()
         {
             Books = new ObservableCollection<Book>();
 
             LoadBooksCommand = new Command(async () => await ExecuteLoadBooksCommand());
+            SearchBooksCommand = new Command(async () => await ExecuteSearchBooksCommand());
 
             MessagingCenter.Subscribe<AddBook, Book>(this, "AddOrUpdateBook", async (obj, book) =>
             {
@@ -31,12 +48,14 @@ namespace BookLibrary.ViewModels
                     var _book = book as Book;
 
                     await App.Database.SaveBookAsync(_book);
+
+                    Books.Add(_book);
                 }
             });
 
         }
 
-        async Task ExecuteLoadBooksCommand()
+        private async Task ExecuteLoadBooksCommand()
         {
             if (IsBusy)
                 return;
@@ -65,6 +84,37 @@ namespace BookLibrary.ViewModels
             {
                 IsBusy = false;
             }
-        }  
+        }
+
+        private async Task ExecuteSearchBooksCommand()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            try
+            {
+                Books.Clear();
+
+                var books = await App.Database.SearchBooksAsync(SearchText);
+
+                foreach (var book in books)
+                {
+                    if (book != null)
+                    {
+                        Books.Add(book);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
     }
 }
