@@ -9,18 +9,16 @@
 
     <StackLayout Orientation="Vertical">
         <SearchBar TextChanged="SearchBar_TextChanged"></SearchBar>
-        
+
         <ListView x:Name="BooksListView" 
-                ItemsSource="{Binding Books}"
-                VerticalOptions="FillAndExpand"
-                 HasUnevenRows="true"
-                 RefreshCommand="{Binding LoadBooksCommand}"
-                 IsPullToRefreshEnabled="true"
-                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                 CachingStrategy="RecycleElement"
-                  ItemSelected="OnItemSelected"
-                  >
-            <!--ItemSelected="OnItemSelected"-->
+                  ItemsSource="{Binding Books}" 
+                  VerticalOptions="FillAndExpand" 
+                  HasUnevenRows="true" 
+                  RefreshCommand="{Binding LoadBooksCommand}" 
+                  IsPullToRefreshEnabled="true" 
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay }"
+                  CachingStrategy="RecycleElement"
+                  ItemSelected="OnItemSelected">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
