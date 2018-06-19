@@ -63,7 +63,7 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                var books = await App.Database.GetBooksAsync();
+                var books = App.Database.GetBooksAsync().Result;
 
                 foreach (var book in books)
                 {
@@ -72,6 +72,8 @@ namespace BookLibrary.ViewModels
                         Books.Add(book);
                     }
                 }
+
+                IsBusy = false;
             }
             catch (Exception ex)
             {
@@ -79,7 +81,6 @@ namespace BookLibrary.ViewModels
             }
             finally
             {
-                IsBusy = false;
             }
         }
 
