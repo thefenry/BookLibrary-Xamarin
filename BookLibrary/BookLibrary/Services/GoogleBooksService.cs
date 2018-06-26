@@ -21,7 +21,13 @@ namespace BookLibrary.Services
             {
                 Author = string.Join(",", bookResult.Items[0].VolumeInfo.Authors),
 
-                Title = bookResult.Items[0].VolumeInfo.Title
+                Title = bookResult.Items[0].VolumeInfo.Title,
+
+                Description = bookResult.Items[0].VolumeInfo.Description,
+
+                IsEBook = bookResult.Items[0].SalesInfo.IsEbook,
+
+                Category = string.Join(",", bookResult.Items[0].VolumeInfo.Categories)
             };
         }
     }

@@ -6,13 +6,28 @@
         <ToolbarItem Text="Scan" Clicked="OnScan_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Tile" />
-            <Entry Text="{Binding Book.Title}" />
-            <Label Text="Author" />
-            <Entry Text="{Binding Book.Author}" />
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Tile" />
+                <Entry Text="{Binding Book.Title}" />
+                <Label Text="Author" />
+                <Entry Text="{Binding Book.Author}" />
 
-            <Button Text="Save" Clicked="OnCreateClicked" />
-        </StackLayout>
+
+                <Label Text="Description:" FontSize="Medium" />
+                <Entry Text="{Binding Book.Description}"/>
+                <Label Text="Series:" FontSize="Medium" />
+                <Entry Text="{Binding Book.Series}"/>
+                <Label Text="Genre:" FontSize="Medium" />
+                <Entry Text="{Binding Book.Genre}" />
+                <Label Text="Category:" FontSize="Medium" />
+                <Entry Text="{Binding Book.Category}"/>
+                <Label Text="EBook:" FontSize="Medium" />
+                <Entry Text="{Binding Book.IsEBook}"/> 
+
+
+                <Button Text="Save" Clicked="OnCreateClicked" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

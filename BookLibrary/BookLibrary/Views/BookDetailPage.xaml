@@ -9,6 +9,16 @@
             <Label Text="{Binding Book.Title}" FontSize="Small"/>
             <Label Text="Author:" FontSize="Medium" />
             <Label Text="{Binding Book.Author}" FontSize="Small"/>
+            <Label Text="Description:" FontSize="Medium" />
+            <Label Text="{Binding Book.Description}" FontSize="Small"/>
+            <Label Text="Series:" FontSize="Medium" />
+            <Label Text="{Binding Book.Series}" FontSize="Small"/>
+            <Label Text="Genre:" FontSize="Medium" />
+            <Label Text="{Binding Book.Genre}" FontSize="Small"/>
+            <Label Text="Category:" FontSize="Medium" />
+            <Label Text="{Binding Book.Category}" FontSize="Small"/>
+            <Label Text="EBook:" FontSize="Medium" />
+            <Label Text="{Binding Book.IsEBook}" FontSize="Small"/>
         </StackLayout>
     </ContentPage.Content>
 
