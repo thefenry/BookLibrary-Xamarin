@@ -8,24 +8,25 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Label Text="Tile" />
-                <Entry Text="{Binding Book.Title}" />
-                <Label Text="Author" />
-                <Entry Text="{Binding Book.Author}" />
+                <!--<Label Text="Tile" />-->
+                <Entry Text="{Binding Book.Title}" Placeholder="Tile" />
+                <!--<Label Text="Author" />-->
+                <Entry Text="{Binding Book.Author}" Placeholder="Author" />
 
 
                 <Label Text="Description:" FontSize="Medium" />
-                <Entry Text="{Binding Book.Description}"/>
-                <Label Text="Series:" FontSize="Medium" />
-                <Entry Text="{Binding Book.Series}"/>
-                <Label Text="Genre:" FontSize="Medium" />
-                <Entry Text="{Binding Book.Genre}" />
-                <Label Text="Category:" FontSize="Medium" />
-                <Entry Text="{Binding Book.Category}"/>
+                <Editor Text="{Binding Book.Description}" />
+                <!--<Label Text="Series:" FontSize="Medium" />-->
+                <Entry Text="{Binding Book.Series}" Placeholder="Series"/>
+                <!--<Label Text="Genre:" FontSize="Medium" />-->
+                <Entry Text="{Binding Book.Genre}" Placeholder="Genre" />
+                <!--<Label Text="Category:" FontSize="Medium" />-->
+                <Entry Text="{Binding Book.Category}" Placeholder="Category"/>
                 <Label Text="EBook:" FontSize="Medium" />
-                <Entry Text="{Binding Book.IsEBook}"/> 
+                <!--<Entry Text="{Binding Book.IsEBook}"/>-->
 
-
+                <Switch IsToggled="{Binding Book.IsEBook}"></Switch>
+                
                 <Button Text="Save" Clicked="OnCreateClicked" />
             </StackLayout>
         </ScrollView>
