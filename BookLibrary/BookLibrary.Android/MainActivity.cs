@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xfx;
 
 namespace BookLibrary.Droid
 {
@@ -18,7 +19,7 @@ namespace BookLibrary.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            XfxControls.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             // This line is leveraging the android-specific implementation
