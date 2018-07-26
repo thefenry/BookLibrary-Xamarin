@@ -1,8 +1,10 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Helpers;
+using BookLibrary.Models;
 using BookLibrary.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -64,6 +66,11 @@ namespace BookLibrary.ViewModels
                 Books.Clear();
 
                 var books = App.Database.GetBooksAsync().Result;
+
+                if (!books.Any())
+                {
+                    books = ReadSeedJson.GetSeedData();
+                }
 
                 foreach (var book in books)
                 {
