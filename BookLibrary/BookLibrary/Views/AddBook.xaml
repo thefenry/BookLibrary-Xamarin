@@ -1,18 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xfx="clr-namespace:Xfx;assembly=Xfx.Controls"
              x:Class="BookLibrary.Views.AddBook">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Scan" Clicked="OnScan_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Tile" />
-            <Entry Text="{Binding Book.Title}" />
-            <Label Text="Author" />
-            <Entry Text="{Binding Book.Author}" />
+        <ScrollView>
+            <StackLayout Spacing="0">
 
-            <Button Text="Save" Clicked="OnCreateClicked" />
-        </StackLayout>
+                <!--<Label Text="Tile" />-->
+                <xfx:XfxEntry Placeholder="Enter Book Title" Text="{Binding Book.Title}" />
+
+                <!--<Label Text="Author" />-->
+                <xfx:XfxEntry Placeholder="Author" Text="{Binding Book.Author}" />
+
+                <!--<Label Text="Series" />-->
+                <xfx:XfxEntry Placeholder="Series" Text="{Binding Book.Series}" />
+
+                <!--<Label Text="Description" />-->
+                <Label Text="Description:" FontSize="Small" />
+                <Editor Text="{Binding Book.Description}" HeightRequest="100"/>
+
+                <!--<Label Text="Genre" />-->
+                <xfx:XfxEntry Placeholder="Genre" Text="{Binding Book.Genre}" />
+
+                <xfx:XfxEntry Placeholder="Category" Text="{Binding Book.Category}" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="EBook:" FontSize="Medium" />
+                    <!--<Entry Text="{Binding Book.IsEBook}"/>-->
+                    <Switch IsToggled="{Binding Book.IsEBook}"></Switch>
+                </StackLayout>
+
+                <Button Text="Save" Clicked="OnCreateClicked" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
