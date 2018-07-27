@@ -20,13 +20,10 @@ namespace BookLibrary.Helpers
             List<Book> books;
 
             string json;
-            using (var reader = new System.IO.StreamReader(stream))
+            using (var reader = new StreamReader(stream))
             {
-
                 json = reader.ReadToEnd();
                 books = JsonConvert.DeserializeObject<List<Book>>(json);
-
-                //earthquakes = rootobject.earthquakes;
             }
 
             return books;

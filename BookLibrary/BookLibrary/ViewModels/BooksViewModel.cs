@@ -70,6 +70,10 @@ namespace BookLibrary.ViewModels
                 if (!books.Any())
                 {
                     books = ReadSeedJson.GetSeedData();
+                    if (books.Any())
+                    {
+                        await App.Database.SaveBookBatchAsync(books);
+                    }
                 }
 
                 foreach (var book in books)

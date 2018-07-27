@@ -1,5 +1,6 @@
 ﻿using BookLibrary.Models;
 using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -51,6 +52,11 @@ namespace BookLibrary.DAL
         public Task<int> DeleteBookAsync(Book book)
         {
             return database.DeleteAsync(book);
+        }
+
+        internal Task SaveBookBatchAsync(List<Book> books)
+        {
+            return database.InsertAllAsync(books);
         }
     }
 }
