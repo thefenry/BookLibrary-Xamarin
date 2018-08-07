@@ -23,10 +23,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Title}" 
+                        <StackLayout Padding="10,5,10,5">
+                            <Label Text="{Binding Title}" FontSize="Large"
                    Style="{DynamicResource ListItemTextStyle}" />
-                            <Label Text="{Binding Author}" 
+                            <Label Text="{Binding Author}" FontSize="Small" 
                    Style="{DynamicResource ListItemDetailTextStyle}"/>
                         </StackLayout>
                     </ViewCell>
