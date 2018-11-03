@@ -4,11 +4,15 @@
              x:Class="BookLibrary.Views.BookList">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sort" Clicked="Sort_Clicked" />
+        <ToolbarItem Text="Search" Clicked="Search_Clicked" />
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
 
     <StackLayout Orientation="Vertical">
-        <SearchBar TextChanged="SearchBar_TextChanged"></SearchBar>
+        <Label x:Name="SortLabel">Sorted by: Author</Label>
+
+        <SearchBar x:Name="BookSearch" TextChanged="SearchBar_TextChanged" IsVisible="False"></SearchBar>
 
         <ListView x:Name="BooksListView" 
                   ItemsSource="{Binding Books}" 

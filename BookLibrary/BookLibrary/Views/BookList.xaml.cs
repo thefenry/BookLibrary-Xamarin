@@ -11,6 +11,7 @@ namespace BookLibrary.Views
     public partial class BookList : ContentPage
     {
         BooksViewModel booksViewModel;
+        public bool showFilter = true;
 
         public BookList()
         {
@@ -36,6 +37,21 @@ namespace BookLibrary.Views
             await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
         }
 
+        public async void Sort_Clicked(object sender, EventArgs e)
+        {
+            var action = await DisplayActionSheet("Sort By: ", "Cancel", null, "Author","Title","Series");
+                        
+            SortLabel.Text = $"Sorted by: {action}";
+
+            //Todo :Implement new sorting functionality
+            throw new NotImplementedException();
+        }
+
+        public void Search_Clicked(object sender, EventArgs e)
+        {
+            BookSearch.IsVisible = !BookSearch.IsVisible;
+        }
+               
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -63,6 +79,11 @@ namespace BookLibrary.Views
 
                 //list.ItemsSource = tempdata.Where(x => x.Name.StartsWith(e.NewTextValue));
             }
+        }
+
+        private void picker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
         }
     }
 }
