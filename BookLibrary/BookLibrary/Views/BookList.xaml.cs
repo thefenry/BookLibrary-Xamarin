@@ -1,7 +1,6 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
 using System;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -40,11 +39,13 @@ namespace BookLibrary.Views
         public async void Sort_Clicked(object sender, EventArgs e)
         {
             var action = await DisplayActionSheet("Sort By: ", "Cancel", null, "Author","Title","Series");
-                        
-            SortLabel.Text = $"Sorted by: {action}";
 
-            //Todo :Implement new sorting functionality
-            throw new NotImplementedException();
+            if (action != "Cancel")
+            {
+                booksViewModel.ExecuteSortBooksCommand(action);
+            }
+
+            SortLabel.Text = $"Sorted by: {action}";
         }
 
         public void Search_Clicked(object sender, EventArgs e)

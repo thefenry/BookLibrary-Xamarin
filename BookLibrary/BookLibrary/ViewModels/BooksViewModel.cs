@@ -2,6 +2,7 @@
 using BookLibrary.Models;
 using BookLibrary.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace BookLibrary.ViewModels
 
         public ObservableCollection<Book> Books
         {
-            get { return _books; }
+            get => _books;
             set
             {
                 _books = value;
@@ -30,7 +31,6 @@ namespace BookLibrary.ViewModels
         public Command LoadBooksCommand { get; set; }
 
         public Command SearchBooksCommand { get; set; }
-
 
         public BooksViewModel()
         {
@@ -44,7 +44,7 @@ namespace BookLibrary.ViewModels
                 if (book != null)
                 {
 
-                    var _book = book as Book;
+                    Book _book = book as Book;
 
                     await App.Database.SaveBookAsync(_book);
 
@@ -65,7 +65,7 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                var books = App.Database.GetBooksAsync().Result;
+                List<Book> books = App.Database.GetBooksAsync().Result;
 
                 //if (!books.Any())
                 //{
@@ -76,7 +76,8 @@ namespace BookLibrary.ViewModels
                 //    }
                 //}
 
-                foreach (var book in books)
+                books = books.OrderBy(x => x.Series).ToList();
+                foreach (Book book in books)
                 {
                     if (book != null)
                     {
@@ -106,9 +107,9 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                var books = await App.Database.SearchBooksAsync(SearchText);
+                List<Book> books = await App.Database.SearchBooksAsync(SearchText);
 
-                foreach (var book in books)
+                foreach (Book book in books)
                 {
                     if (book != null)
                     {
@@ -124,6 +125,27 @@ namespace BookLibrary.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public void ExecuteSortBooksCommand(string sortType)
+        {
+            List<Book> tempBooks;
+
+            switch (sortType)
+            {
+                case "Author":
+                    tempBooks = Books.OrderBy(x => x.Author).ToList();
+                    break;
+                case "Title":
+                    tempBooks = Books.OrderBy(x => x.Title).ToList();
+                    break;
+                default:
+                    tempBooks = Books.OrderBy(x => x.Series).ToList();
+                    break;
+            }
+
+            Books.Clear();
+            Books = new ObservableCollection<Book>(tempBooks);
         }
     }
 }

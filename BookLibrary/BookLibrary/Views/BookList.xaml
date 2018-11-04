@@ -13,7 +13,7 @@
 
     <StackLayout Orientation="Vertical" >
         <StackLayout Padding="10, 5" BackgroundColor="{StaticResource oppositeBackgroundColor}">
-            <Label x:Name="SortLabel" TextColor="{StaticResource textColor}" >Sorted by: Author</Label>
+            <Label x:Name="SortLabel" TextColor="{StaticResource textColor}" >Sorted by: Series</Label>
 
             <SearchBar x:Name="BookSearch" TextChanged="SearchBar_TextChanged" 
                        IsVisible="False" TextColor="{StaticResource textColor}" 
