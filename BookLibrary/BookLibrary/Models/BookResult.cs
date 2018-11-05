@@ -11,7 +11,7 @@ namespace BookLibrary.Models
     {
         public VolumeInfo VolumeInfo { get; set; }
 
-        public SalesInfo SalesInfo { get; set; }
+        public SaleInfo SaleInfo { get; set; }
     }
     
     public class VolumeInfo
@@ -25,7 +25,7 @@ namespace BookLibrary.Models
         public List<string> Categories { get; set; }
     }
 
-    public class SalesInfo
+    public class SaleInfo
     {
         public bool IsEbook { get; set; }
     }

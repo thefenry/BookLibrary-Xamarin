@@ -1,7 +1,6 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
 using System;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +10,7 @@ namespace BookLibrary.Views
     public partial class BookList : ContentPage
     {
         BooksViewModel booksViewModel;
+        public bool showFilter = true;
 
         public BookList()
         {
@@ -36,6 +36,23 @@ namespace BookLibrary.Views
             await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
         }
 
+        public async void Sort_Clicked(object sender, EventArgs e)
+        {
+            var action = await DisplayActionSheet("Sort By: ", "Cancel", null, "Author","Title","Series");
+
+            if (action != "Cancel")
+            {
+                booksViewModel.ExecuteSortBooksCommand(action);
+            }
+
+            SortLabel.Text = $"Sorted by: {action}";
+        }
+
+        public void Search_Clicked(object sender, EventArgs e)
+        {
+            BookSearch.IsVisible = !BookSearch.IsVisible;
+        }
+               
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -63,6 +80,11 @@ namespace BookLibrary.Views
 
                 //list.ItemsSource = tempdata.Where(x => x.Name.StartsWith(e.NewTextValue));
             }
+        }
+
+        private void picker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,14 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BookLibrary.Views.BookList">
+             x:Class="BookLibrary.Views.BookList"        
+             BackgroundColor="{StaticResource backgroundColor}"
+             >
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Sort" Clicked="Sort_Clicked" Icon="@Resources/sort.png" />
+        <ToolbarItem Text="Search" Clicked="Search_Clicked" Icon="@Resources/search.png" />
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" Icon="@Resources/add.png" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Orientation="Vertical">
-        <SearchBar TextChanged="SearchBar_TextChanged"></SearchBar>
+    <StackLayout Orientation="Vertical" >
+        <StackLayout Padding="10, 5" BackgroundColor="{StaticResource oppositeBackgroundColor}">
+            <Label x:Name="SortLabel" TextColor="{StaticResource textColor}" >Sorted by: Series</Label>
+
+            <SearchBar x:Name="BookSearch" TextChanged="SearchBar_TextChanged" 
+                       IsVisible="False" TextColor="{StaticResource textColor}" 
+                       VerticalOptions="CenterAndExpand" 
+                       BackgroundColor="{StaticResource backgroundColor}" 
+                       PlaceholderColor="{StaticResource textColor}" Placeholder="Search..."></SearchBar>
+        </StackLayout>
 
         <ListView x:Name="BooksListView" 
                   ItemsSource="{Binding Books}" 
@@ -23,11 +35,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Title}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-                            <Label Text="{Binding Author}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+                        <StackLayout Padding="10,5,10,5">
+                            <Label Text="{Binding Title}" FontSize="Large"
+                   Style="{DynamicResource ListItemTextStyle}" TextColor="{StaticResource textColor}" />
+                            <Label Text="{Binding Author}" FontSize="Small" 
+                   Style="{DynamicResource ListItemDetailTextStyle}" TextColor="{StaticResource textColor}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

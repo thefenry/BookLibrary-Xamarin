@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace BookLibrary.Models
         
         public string Description { get; set; }
 
+        [JsonProperty("Series Title")]
         public string Series { get; set; }
 
         public string Genre { get; set; }

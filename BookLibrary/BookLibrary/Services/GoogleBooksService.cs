@@ -1,5 +1,6 @@
 ﻿using BookLibrary.DAL;
 using BookLibrary.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookLibrary.Services
@@ -17,18 +18,80 @@ namespace BookLibrary.Services
                 return null;
             }
 
+            Item book = bookResult.Items.First();
+
             return new Book
             {
-                Author = string.Join(",", bookResult.Items[0].VolumeInfo.Authors),
+                Author = SetAuthor(book),
 
-                Title = bookResult.Items[0].VolumeInfo.Title,
+                Title = SetTitle(book),
 
-                Description = bookResult.Items[0].VolumeInfo.Description,
+                Description = SetDescription(book),
 
-                IsEBook = bookResult.Items[0].SalesInfo.IsEbook,
+                IsEBook = SetIsEbook(book),
 
-                Category = string.Join(",", bookResult.Items[0].VolumeInfo.Categories)
+                Category = SetCategory(book)
             };
+        }
+        
+        private string SetAuthor(Item book)
+        {
+            if (book.VolumeInfo == null && book.VolumeInfo.Authors == null)
+            {
+                return null;
+            }
+            else
+            {
+                return string.Join(",", book.VolumeInfo.Authors);
+            }
+        }
+
+        private string SetTitle(Item book)
+        {
+            if (book.VolumeInfo == null && book.VolumeInfo.Title == null)
+            {
+                return null;
+            }
+            else
+            {
+                return book.VolumeInfo.Title;
+            }
+        }
+
+        private string SetDescription(Item book)
+        {
+            if (book.VolumeInfo == null && book.VolumeInfo.Description == null)
+            {
+                return null;
+            }
+            else
+            {
+                return book.VolumeInfo.Description;
+            }
+        }
+
+        private bool SetIsEbook(Item book)
+        {
+            if (book.SaleInfo == null)
+            {
+                return false;
+            }
+            else
+            {
+                return book.SaleInfo.IsEbook;
+            }
+        }
+
+        private string SetCategory(Item book)
+        {
+            if (book.VolumeInfo == null && book.VolumeInfo.Categories == null)
+            {
+                return null;
+            }
+            else
+            {
+                return string.Join(",", book.VolumeInfo.Categories);
+            }
         }
     }
 }

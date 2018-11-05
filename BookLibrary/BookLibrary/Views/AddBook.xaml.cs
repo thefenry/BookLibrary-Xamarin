@@ -2,8 +2,9 @@
 using BookLibrary.Services;
 using BookLibrary.ViewModels;
 using System;
-
+using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace BookLibrary.Views
@@ -48,8 +49,8 @@ namespace BookLibrary.Views
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                await DisplayAlert("Error Occured", "An Error occured while scanning. Try again later.", "Ok");
+                Log.Warning("Scanner", ex.Message);
             }
 
         }
