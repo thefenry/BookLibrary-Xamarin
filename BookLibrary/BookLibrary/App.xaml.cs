@@ -1,6 +1,6 @@
 ﻿using BookLibrary.DAL;
 using BookLibrary.Interfaces;
-
+using BookLibrary.Views;
 using Xamarin.Forms;
 
 namespace BookLibrary
@@ -12,7 +12,7 @@ namespace BookLibrary
 		public App ()
 		{
 			InitializeComponent();
-            MainPage = new NavigationPage(new BookLibrary.Views.BookList());//.MainTabPage();
+            MainPage = new MainPage();// NavigationPage(new BookLibrary.Views.BookList());//.MainTabPage();
         }
 
         public static BookRepository Database
