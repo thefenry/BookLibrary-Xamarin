@@ -67,14 +67,14 @@ namespace BookLibrary.ViewModels
 
                 List<Book> books = App.Database.GetBooksAsync().Result;
 
-                //if (!books.Any())
-                //{
-                //    books = ReadSeedJson.GetSeedData();
-                //    if (books.Any())
-                //    {
-                //        await App.Database.SaveBookBatchAsync(books);
-                //    }
-                //}
+                if (!books.Any())
+                {
+                    books = ReadSeedJson.GetSeedData();
+                    if (books.Any())
+                    {
+                        await App.Database.SaveBookBatchAsync(books);
+                    }
+                }
 
                 books = books.OrderBy(x => x.Series).ToList();
                 foreach (Book book in books)

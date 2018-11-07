@@ -31,7 +31,7 @@ namespace BookLibrary.Views
                         MenuPages.Add(id, new NavigationPage(new BookList()));
                         break;
                     case (int)MenuItemType.About:
-                        MenuPages.Add(id, new NavigationPage(new AboutPage()));
+                        MenuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;
                 }
             }
