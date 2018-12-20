@@ -1,11 +1,11 @@
 ﻿namespace BookLibrary.Models
 {
-
     public enum MenuItemType
     {
         Browse,
-        About
+        ImportExport
     }
+
     public class HomeMenuItem
     {
         public MenuItemType Id { get; set; }

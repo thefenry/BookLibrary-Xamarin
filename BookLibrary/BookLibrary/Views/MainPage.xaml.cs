@@ -30,7 +30,7 @@ namespace BookLibrary.Views
                     case (int)MenuItemType.Browse:
                         MenuPages.Add(id, new NavigationPage(new BookList()));
                         break;
-                    case (int)MenuItemType.About:
+                    case (int)MenuItemType.ImportExport:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;
                 }
