@@ -8,7 +8,7 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <Button Clicked="Import_Button_ClickedAsync" Text="Upload Files Backup" />
+            <Button Clicked="Export_Button_ClickedAsync" Text="Upload Files Backup" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
