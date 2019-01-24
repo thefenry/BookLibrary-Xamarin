@@ -4,6 +4,6 @@
     {
         string GetLocalFilePath(string filename);
 
-        string GetDownloadFolderPath();
+        string GetDownloadFolderPath(string filename);
     }
 }
