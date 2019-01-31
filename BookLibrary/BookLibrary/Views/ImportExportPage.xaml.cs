@@ -1,7 +1,10 @@
-﻿using BookLibrary.Interfaces;
+﻿using BookLibrary.Helpers;
+using BookLibrary.Interfaces;
 using BookLibrary.Services;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.IO;
 using Xamarin.Forms;
@@ -45,20 +48,55 @@ namespace BookLibrary.Views
         {
             try
             {
-                string exportString = await _importExportService.GetExportLibraryContentAsync();
+                PermissionStatus status = PermissionStatus.Unknown;
+                status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
 
-                string downloadPath = DependencyService.Get<IFileHelper>().GetDownloadFolderPath("libraryBackup.json");
+                //await DisplayAlert("Pre - Results", status.ToString(), "OK");
 
-                File.WriteAllText(downloadPath, exportString);
+                if (status != PermissionStatus.Granted)
+                {
 
-                await DisplayAlert("Success", "Your file has been successfully downloaded", "Ok");
+                    status = await PermissionUtility.CheckPermissions(Permission.Storage);
+                }
+
+                if(status == PermissionStatus.Granted)
+                {
+                    string exportString = await _importExportService.GetExportLibraryContentAsync();
+
+                    string downloadPath = DependencyService.Get<IFileHelper>().GetDownloadFolderPath("libraryBackup.json");
+
+                    File.WriteAllText(downloadPath, exportString);
+
+                    await DisplayAlert("Success", "Your file has been successfully downloaded", "Ok");
+                }
+
+                //await DisplayAlert("Results", status.ToString(), "OK");
+
             }
             catch (Exception ex)
             {
+
                 await DisplayAlert("Error", ex.Message, "Ok");
 
                 Console.WriteLine("Exception exporting file: " + ex.ToString());
             }
+
+            //try
+            //{
+            //    string exportString = await _importExportService.GetExportLibraryContentAsync();
+
+            //    string downloadPath = DependencyService.Get<IFileHelper>().GetDownloadFolderPath("libraryBackup.json");
+
+            //    //File.WriteAllText(downloadPath, exportString);
+
+            //    //await DisplayAlert("Success", "Your file has been successfully downloaded", "Ok");
+            //}
+            //catch (Exception ex)
+            //{
+            //    await DisplayAlert("Error", ex.Message, "Ok");
+
+            //    Console.WriteLine("Exception exporting file: " + ex.ToString());
+            //}
         }
     }
 }
