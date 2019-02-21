@@ -1,5 +1,4 @@
-﻿using BookLibrary.Helpers;
-using BookLibrary.Models;
+﻿using BookLibrary.Models;
 using BookLibrary.Views;
 using System;
 using System.Collections.Generic;
@@ -51,7 +50,6 @@ namespace BookLibrary.ViewModels
                     Books.Add(_book);
                 }
             });
-
         }
 
         private async Task ExecuteLoadBooksCommand()
@@ -67,14 +65,14 @@ namespace BookLibrary.ViewModels
 
                 List<Book> books = App.Database.GetBooksAsync().Result;
 
-                if (!books.Any())
-                {
-                    books = ReadSeedJson.GetSeedData();
-                    if (books.Any())
-                    {
-                        await App.Database.SaveBookBatchAsync(books);
-                    }
-                }
+                //if (!books.Any())
+                //{
+                //    books = ReadSeedJson.GetSeedData();
+                //    if (books.Any())
+                //    {
+                //        await App.Database.SaveBookBatchAsync(books);
+                //    }
+                //}
 
                 books = books.OrderBy(x => x.Series).ToList();
                 foreach (Book book in books)
