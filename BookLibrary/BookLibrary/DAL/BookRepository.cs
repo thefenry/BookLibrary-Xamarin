@@ -1,6 +1,5 @@
 ﻿using BookLibrary.Models;
 using SQLite;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -45,7 +44,7 @@ namespace BookLibrary.DAL
 
         public async Task<List<Book>> SearchBooksAsync(string searchText)
         {
-            return await database.Table<Book>().Where(x => x.Title.ToLower().Contains(searchText.ToLower()) 
+            return await database.Table<Book>().Where(x => x.Title.ToLower().Contains(searchText.ToLower())
             || x.Author.ToLower().Contains(searchText.ToLower())).ToListAsync();
         }
 
@@ -57,6 +56,11 @@ namespace BookLibrary.DAL
         internal Task SaveBookBatchAsync(List<Book> books)
         {
             return database.InsertAllAsync(books);
+        }
+
+        internal async Task DeleteBooksAsync()
+        {
+            await database.DeleteAllAsync<Book>();
         }
     }
 }

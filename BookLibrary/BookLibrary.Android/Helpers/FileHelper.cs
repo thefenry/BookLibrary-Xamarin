@@ -14,5 +14,14 @@ namespace BookLibrary.Droid
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             return Path.Combine(path, filename);
         }
+
+        public string GetDownloadFolderPath(string filename)
+        {
+            string downloadPath = Path.Combine(
+                Android.OS.Environment.ExternalStorageDirectory.AbsolutePath,
+                Android.OS.Environment.DirectoryDownloads, filename);
+
+            return downloadPath;
+        }
     }
 }

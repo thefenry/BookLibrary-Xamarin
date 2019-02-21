@@ -1,5 +1,4 @@
-﻿using BookLibrary.Helpers;
-using BookLibrary.Models;
+﻿using BookLibrary.Models;
 using BookLibrary.Views;
 using System;
 using System.Collections.Generic;
@@ -51,7 +50,6 @@ namespace BookLibrary.ViewModels
                     Books.Add(_book);
                 }
             });
-
         }
 
         private async Task ExecuteLoadBooksCommand()
