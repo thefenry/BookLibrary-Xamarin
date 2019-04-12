@@ -14,7 +14,7 @@ namespace BookLibrary.Services
 
         public async Task<string> GetExportLibraryContentAsync()
         {
-            List<Book> books = await App.Database.GetBooksAsync();
+            List<Book> books = await App.BookRepository.Get();
 
             return JsonConvert.SerializeObject(books, Formatting.Indented);
         }
@@ -24,7 +24,10 @@ namespace BookLibrary.Services
             string contents = System.Text.Encoding.UTF8.GetString(dataArray);
             List<Book> booksList = JsonConvert.DeserializeObject<List<Book>>(contents);
 
-            await App.Database.SaveBookBatchAsync(booksList);
+            foreach (var book in booksList)
+            {
+                await App.BookRepository.Insert(book);
+            }
 
             MessagingCenter.Send(this, "Addbooks", booksList);
 

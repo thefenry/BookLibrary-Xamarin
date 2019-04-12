@@ -28,7 +28,7 @@ namespace BookLibrary.Views
 
         async Task DeleteItem_Clicked(object sender, EventArgs args)
         {
-            await App.Database.DeleteBookAsync(this._book.Book);
+            await App.BookRepository.Delete(this._book.Book);
             await Navigation.PopToRootAsync();
         }
 

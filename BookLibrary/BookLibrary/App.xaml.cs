@@ -1,45 +1,53 @@
 ﻿using BookLibrary.DAL;
 using BookLibrary.Interfaces;
+using BookLibrary.Models;
 using BookLibrary.Views;
+using SQLite;
 using Xamarin.Forms;
 
 namespace BookLibrary
 {
-	public partial class App : Application
-	{
-        static BookRepository bookRepository;
+    public partial class App : Application
+    {
+        private static SQLiteAsyncConnection database;
+        private static LibraryRepository<Book> bookRepository;
 
-		public App ()
-		{
-			InitializeComponent();
+        public App()
+        {
+            InitializeComponent();
+
+            string dbPath = DependencyService.Get<IFileHelper>().GetLocalFilePath("BookSQLite.db3");
+            database = new SQLiteAsyncConnection(dbPath);
+            database.CreateTableAsync<Book>().Wait();
+                        
             MainPage = new MainPage();// NavigationPage(new BookLibrary.Views.BookList());//.MainTabPage();
         }
 
-        public static BookRepository Database
+        public static LibraryRepository<Book> BookRepository
         {
             get
             {
                 if (bookRepository == null)
                 {
-                    bookRepository = new BookRepository(DependencyService.Get<IFileHelper>().GetLocalFilePath("BookSQLite.db3"));
+                    bookRepository = new LibraryRepository<Book>(database);
                 }
                 return bookRepository;
             }
         }
 
-        protected override void OnStart ()
-		{
-			// Handle when your app starts
-		}
+        protected override void OnStart()
+        {
+            // Handle when your app starts
+        }
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
 
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
-	}
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        }
+    }
 }

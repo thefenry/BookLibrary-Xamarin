@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
+﻿using System.ComponentModel;
 
 namespace BookLibrary.ViewModels
 {
@@ -11,18 +7,19 @@ namespace BookLibrary.ViewModels
         bool isBusy = false;
         public bool IsBusy
         {
-            get { return isBusy; }
-            set {
+            get => isBusy;
+            set
+            {
                 isBusy = value;
                 RaisePropertyChanged("IsBusy");
             }
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }       
+        }
     }
 }

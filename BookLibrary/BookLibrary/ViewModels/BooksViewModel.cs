@@ -1,4 +1,5 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Helpers;
+using BookLibrary.Models;
 using BookLibrary.Views;
 using System;
 using System.Collections.Generic;
@@ -44,8 +45,14 @@ namespace BookLibrary.ViewModels
                 {
 
                     Book _book = book as Book;
-
-                    await App.Database.SaveBookAsync(_book);
+                    if (_book.Id == 0)
+                    {
+                        await App.BookRepository.Insert(_book);
+                    }
+                    else
+                    {
+                        await App.BookRepository.Update(_book);
+                    }
 
                     Books.Add(_book);
                 }
@@ -63,14 +70,17 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                List<Book> books = App.Database.GetBooksAsync().Result;
+                List<Book> books = await App.BookRepository.Get();
 
                 //if (!books.Any())
                 //{
                 //    books = ReadSeedJson.GetSeedData();
                 //    if (books.Any())
                 //    {
-                //        await App.Database.SaveBookBatchAsync(books);
+                //        foreach (Book book in books)
+                //        {
+                //            await App.BookRepository.Insert(book);
+                //        }
                 //    }
                 //}
 
@@ -105,7 +115,8 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                List<Book> books = await App.Database.SearchBooksAsync(SearchText);
+                List<Book> books = await App.BookRepository.Get<Book>(x => x.Title.ToLower().Contains(SearchText.ToLower())
+                || x.Author.ToLower().Contains(SearchText.ToLower()));
 
                 foreach (Book book in books)
                 {
