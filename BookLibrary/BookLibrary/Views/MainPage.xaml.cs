@@ -1,4 +1,5 @@
 ﻿using BookLibrary.Models;
+using BookLibrary.Views.Movies;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,6 +33,9 @@ namespace BookLibrary.Views
                         break;
                     case (int)MenuItemType.ImportExport:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
+                        break;
+                    case (int)MenuItemType.Movies:
+                        MenuPages.Add(id, new NavigationPage(new MovieList()));
                         break;
                 }
             }

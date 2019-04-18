@@ -1,5 +1,4 @@
 ﻿using BookLibrary.Models;
-using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -10,7 +9,7 @@ namespace BookLibrary.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : ContentPage
     {
-        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
+        MainPage RootPage => Application.Current.MainPage as MainPage;
         List<HomeMenuItem> menuItems;
         public MenuPage()
         {
@@ -19,6 +18,7 @@ namespace BookLibrary.Views
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
+                new HomeMenuItem {Id = MenuItemType.Movies, Title="Movies" },
                 new HomeMenuItem {Id = MenuItemType.ImportExport, Title="Import & Export" }
             };
 
@@ -30,7 +30,7 @@ namespace BookLibrary.Views
                 if (e.SelectedItem == null)
                     return;
 
-                var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+                int id = (int)((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
         }

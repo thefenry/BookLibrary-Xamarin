@@ -11,6 +11,7 @@ namespace BookLibrary
     {
         private static SQLiteAsyncConnection database;
         private static LibraryRepository<Book> bookRepository;
+        private static LibraryRepository<Movie> moviesRepository;
 
         public App()
         {
@@ -18,7 +19,7 @@ namespace BookLibrary
 
             string dbPath = DependencyService.Get<IFileHelper>().GetLocalFilePath("BookSQLite.db3");
             database = new SQLiteAsyncConnection(dbPath);
-            database.CreateTableAsync<Book>().Wait();
+            database.CreateTablesAsync<Book, Movie>().Wait();
                         
             MainPage = new MainPage();// NavigationPage(new BookLibrary.Views.BookList());//.MainTabPage();
         }
@@ -32,6 +33,18 @@ namespace BookLibrary
                     bookRepository = new LibraryRepository<Book>(database);
                 }
                 return bookRepository;
+            }
+        }
+
+        public static LibraryRepository<Movie> MoviesRepository
+        {
+            get
+            {
+                if (moviesRepository == null)
+                {
+                    moviesRepository = new LibraryRepository<Movie>(database);
+                }
+                return moviesRepository;
             }
         }
 

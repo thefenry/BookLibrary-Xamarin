@@ -3,6 +3,7 @@
     public enum MenuItemType
     {
         Browse,
+        Movies,
         ImportExport
     }
 
