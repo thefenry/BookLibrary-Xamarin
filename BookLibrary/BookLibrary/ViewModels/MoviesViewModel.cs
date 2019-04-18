@@ -38,7 +38,7 @@ namespace BookLibrary.ViewModels
             LoadMoviesCommand = new Command(async () => await ExecuteLoadMoviesCommand());
             SearchMoviesCommand = new Command(async () => await ExecuteSearchMoviesCommand());
 
-            MessagingCenter.Subscribe<AddMovie, Movie>(this, "AddOrUpdateBook", async (obj, movie) =>
+            MessagingCenter.Subscribe<AddMovie, Movie>(this, "AddOrUpdateMovie", async (obj, movie) =>
             {
                 if (movie != null)
                 {
