@@ -25,10 +25,10 @@ namespace BookLibrary.Views.Movies
             if (item == null)
                 return;
 
-            //await Navigation.PushAsync(new MovieDetailPage(item));
+            await Navigation.PushAsync(new MovieDetailPage(item));
 
-            //// Manually deselect item.
-            //MoviesListView.SelectedItem = null;
+            // Manually deselect item.
+            MoviesListView.SelectedItem = null;
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
