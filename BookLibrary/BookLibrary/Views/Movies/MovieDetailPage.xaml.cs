@@ -26,7 +26,7 @@ namespace BookLibrary.Views.Movies
             await Navigation.PushModalAsync(new NavigationPage(new AddMovie(this._movie.Movie)));
         }
 
-        async Task DeleteItem_Clicked(object sender, EventArgs args)
+        async void DeleteItem_Clicked(object sender, EventArgs args)
         {
             await App.MoviesRepository.Delete(this._movie.Movie);
             await Navigation.PopToRootAsync();

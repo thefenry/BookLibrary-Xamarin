@@ -26,7 +26,7 @@ namespace BookLibrary.Views
             await Navigation.PushModalAsync(new NavigationPage(new AddBook(this._book.Book)));
         }
 
-        async Task DeleteItem_Clicked(object sender, EventArgs args)
+        async void DeleteItem_Clicked(object sender, EventArgs args)
         {
             await App.BookRepository.Delete(this._book.Book);
             await Navigation.PopToRootAsync();
