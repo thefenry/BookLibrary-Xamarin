@@ -15,6 +15,42 @@ namespace BookLibrary.Models
 
         public string MovieType { get; set; }
 
-        public int Year { get; internal set; }
+        public int? Year
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(StringYear))
+                {
+                    return null;
+                }
+
+                bool parsed = int.TryParse(StringYear, out int year);
+                if (!parsed)
+                {
+                    return null;
+                }
+                else
+                {
+                    return year;
+                }
+
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    StringYear = value.ToString();
+                }
+                else
+                {
+                    StringYear = null;
+                }
+            }
+        }
+
+        public string StringYear
+        {
+            get; set;
+        }
     }
 }

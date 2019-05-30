@@ -26,8 +26,8 @@
                 <xfx:XfxEntry Placeholder="Genre" Text="{Binding Movie.Genre}" TextColor="{StaticResource textColor}" 
                               PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
 
-                <xfx:XfxEntry Placeholder="Year" Text="{Binding Movie.Year}" TextColor="{StaticResource textColor}"
-                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
+                <xfx:XfxEntry Placeholder="Year" Text="{Binding Movie.StringYear}" TextColor="{StaticResource textColor}"
+                              PlaceholderColor="{StaticResource textColor}" Keyboard="Numeric" ActivePlaceholderColor="{StaticResource textColor}"/>
                 
                 <Picker x:Name="Movie" 
                         Title="Select Media Type"

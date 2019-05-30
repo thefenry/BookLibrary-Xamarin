@@ -2,7 +2,6 @@
 using MovieLibrary.ViewModels;
 using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace BookLibrary.Views.Movies
@@ -53,10 +52,5 @@ namespace BookLibrary.Views.Movies
             //}
 
         }
-
-        //private void Movie_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-
-        //}
     }
 }
