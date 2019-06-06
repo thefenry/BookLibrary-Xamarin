@@ -17,7 +17,7 @@ namespace BookLibrary.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
+                new HomeMenuItem {Id = MenuItemType.Books, Title="Books" },
                 new HomeMenuItem {Id = MenuItemType.Movies, Title="Movies" },
                 new HomeMenuItem {Id = MenuItemType.ImportExport, Title="Import & Export" }
             };

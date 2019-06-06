@@ -19,7 +19,7 @@ namespace BookLibrary.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.Books, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -28,7 +28,7 @@ namespace BookLibrary.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Browse:
+                    case (int)MenuItemType.Books:
                         MenuPages.Add(id, new NavigationPage(new BookList()));
                         break;
                     case (int)MenuItemType.ImportExport:
