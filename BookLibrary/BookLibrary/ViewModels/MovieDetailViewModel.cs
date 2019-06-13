@@ -13,8 +13,7 @@ namespace MovieLibrary.ViewModels
             get => movie;
             set
             {
-                movie = value;
-                RaisePropertyChanged("Movie");
+                SetProperty(ref movie, value);                
             }
         }
 

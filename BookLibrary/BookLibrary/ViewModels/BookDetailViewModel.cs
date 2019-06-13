@@ -12,8 +12,7 @@ namespace BookLibrary.ViewModels
             get => book;
             set
             {
-                book = value;
-                RaisePropertyChanged("Book");
+                SetProperty(ref book, value);                
             }
         }
 

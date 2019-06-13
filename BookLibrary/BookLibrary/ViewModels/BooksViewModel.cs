@@ -22,10 +22,10 @@ namespace BookLibrary.ViewModels
             get => _books;
             set
             {
-                _books = value;
-                RaisePropertyChanged("Books");
+                SetProperty(ref _books, value);
             }
         }
+        //public ObservableCollection<Book> Books { get; set; }
 
         public Command LoadBooksCommand { get; set; }
 
@@ -58,7 +58,7 @@ namespace BookLibrary.ViewModels
             });
         }
 
-        private async Task ExecuteLoadBooksCommand()
+        async Task ExecuteLoadBooksCommand()
         {
             if (IsBusy)
                 return;
@@ -91,8 +91,6 @@ namespace BookLibrary.ViewModels
                         Books.Add(book);
                     }
                 }
-
-                IsBusy = false;
             }
             catch (Exception ex)
             {
@@ -100,6 +98,7 @@ namespace BookLibrary.ViewModels
             }
             finally
             {
+                IsBusy = false;
             }
         }
 

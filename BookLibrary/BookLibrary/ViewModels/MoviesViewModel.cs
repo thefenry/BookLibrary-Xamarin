@@ -1,4 +1,5 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.DAL;
+using BookLibrary.Models;
 using BookLibrary.Views.Movies;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace BookLibrary.ViewModels
 
         private ObservableCollection<Movie> _movies;
 
+        //public ILibraryRepository<Item> DataStore => DependencyService.Get<ILibraryRepository<Item>>() ?? new LibraryRepository();
+
+
         public string SearchText { get; set; }
 
         public ObservableCollection<Movie> Movies
@@ -22,8 +26,7 @@ namespace BookLibrary.ViewModels
             get => _movies;
             set
             {
-                _movies = value;
-                RaisePropertyChanged("Books");
+                SetProperty(ref _movies, value);
             }
         }
 

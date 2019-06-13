@@ -21,7 +21,7 @@ namespace BookLibrary.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Book;
+            Book item = args.SelectedItem as Book;
             if (item == null)
                 return;
 
@@ -32,13 +32,13 @@ namespace BookLibrary.Views
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
-        {           
+        {
             await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
         }
 
         public async void Sort_Clicked(object sender, EventArgs e)
         {
-            var action = await DisplayActionSheet("Sort By: ", "Cancel", null, "Author","Title","Series");
+            string action = await DisplayActionSheet("Sort By: ", "Cancel", null, "Author", "Title", "Series");
 
             if (action != "Cancel")
             {
@@ -52,7 +52,7 @@ namespace BookLibrary.Views
         {
             BookSearch.IsVisible = !BookSearch.IsVisible;
         }
-               
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -68,23 +68,13 @@ namespace BookLibrary.Views
             if (string.IsNullOrEmpty(searchText))
             {
                 booksViewModel.LoadBooksCommand.Execute(null);
-
-                //list.ItemsSource = tempdata;
             }
 
             else
             {
                 booksViewModel.SearchText = searchText;
                 booksViewModel.SearchBooksCommand.Execute(null);
-                 //booksViewModel.Books.Where(x => x.Title.Contains(searchText) || x.Author.Contains(searchText));
-
-                //list.ItemsSource = tempdata.Where(x => x.Name.StartsWith(e.NewTextValue));
             }
-        }
-
-        private void picker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-
         }
     }
 }
