@@ -58,7 +58,7 @@ namespace BookLibrary.ViewModels
             });
         }
 
-        async Task ExecuteLoadBooksCommand()
+        private async Task ExecuteLoadBooksCommand()
         {
             if (IsBusy)
                 return;

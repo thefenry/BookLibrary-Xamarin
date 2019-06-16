@@ -1,6 +1,7 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -56,8 +57,7 @@ namespace BookLibrary.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            booksViewModel.LoadBooksCommand.Execute(null);
+            Task.Run(() => booksViewModel.LoadBooksCommand.Execute(null));
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
