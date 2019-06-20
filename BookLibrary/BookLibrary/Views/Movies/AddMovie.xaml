@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xfx="clr-namespace:Xfx;assembly=Xfx.Controls"
+             x:Class="BookLibrary.Views.Movies.AddMovie"
+             BackgroundColor="{StaticResource backgroundColor}"
+              Title="Add Movie">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Scan" Clicked="OnScan_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0">
+
+                <!--<Label Text="Tile" />-->
+                <xfx:XfxEntry Placeholder="Enter Movie Title" Text="{Binding Movie.Title}" 
+                              TextColor="{StaticResource textColor}" PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}" />
+
+                <!--<Label Text="Description" />-->
+                <xfx:XfxEntry Placeholder="Description" Text="{Binding Movie.Description}" TextColor="{StaticResource textColor}" 
+                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
+
+                <!--<Label Text="Genre" />-->
+                <xfx:XfxEntry Placeholder="Genre" Text="{Binding Movie.Genre}" TextColor="{StaticResource textColor}" 
+                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
+
+                <xfx:XfxEntry Placeholder="Year" Text="{Binding Movie.StringYear}" TextColor="{StaticResource textColor}"
+                              PlaceholderColor="{StaticResource textColor}" Keyboard="Numeric" ActivePlaceholderColor="{StaticResource textColor}"/>
+                
+                <Picker x:Name="Movie" 
+                        Title="Select Media Type"
+                        TextColor="{StaticResource textColor}" 
+                        TitleColor="{StaticResource textColor}" 
+                        SelectedItem="{Binding Movie.MovieType, Mode=TwoWay}"
+                          >
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Blu-ray</x:String>
+                            <x:String>DVD</x:String>
+                            <x:String>4K</x:String>
+                            <x:String>Digital</x:String>
+                            <x:String>VHS</x:String>                            
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Button Text="Save" Clicked="OnCreateClicked" Margin="0, 10" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

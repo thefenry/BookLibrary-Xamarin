@@ -1,8 +1,5 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace BookLibrary.ViewModels
@@ -12,10 +9,11 @@ namespace BookLibrary.ViewModels
         Book book;
         public Book Book
         {
-            get { return book; }
-            set {
-                book = value;
-                RaisePropertyChanged("Book"); }
+            get => book;
+            set
+            {
+                SetProperty(ref book, value);                
+            }
         }
 
 

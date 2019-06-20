@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BookLibrary.Models
 {
     public class Book
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; internal set; }
+        public int Id { get; set; }
 
         public string Title { get; set; }
 

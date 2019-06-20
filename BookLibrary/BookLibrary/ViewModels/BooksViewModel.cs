@@ -22,10 +22,10 @@ namespace BookLibrary.ViewModels
             get => _books;
             set
             {
-                _books = value;
-                RaisePropertyChanged("Books");
+                SetProperty(ref _books, value);
             }
         }
+        //public ObservableCollection<Book> Books { get; set; }
 
         public Command LoadBooksCommand { get; set; }
 
@@ -44,8 +44,14 @@ namespace BookLibrary.ViewModels
                 {
 
                     Book _book = book as Book;
-
-                    await App.Database.SaveBookAsync(_book);
+                    if (_book.Id == 0)
+                    {
+                        await App.BookRepository.Insert(_book);
+                    }
+                    else
+                    {
+                        await App.BookRepository.Update(_book);
+                    }
 
                     Books.Add(_book);
                 }
@@ -63,14 +69,17 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                List<Book> books = App.Database.GetBooksAsync().Result;
+                List<Book> books = await App.BookRepository.Get();
 
                 //if (!books.Any())
                 //{
                 //    books = ReadSeedJson.GetSeedData();
                 //    if (books.Any())
                 //    {
-                //        await App.Database.SaveBookBatchAsync(books);
+                //        foreach (Book book in books)
+                //        {
+                //            await App.BookRepository.Insert(book);
+                //        }
                 //    }
                 //}
 
@@ -82,8 +91,6 @@ namespace BookLibrary.ViewModels
                         Books.Add(book);
                     }
                 }
-
-                IsBusy = false;
             }
             catch (Exception ex)
             {
@@ -91,6 +98,7 @@ namespace BookLibrary.ViewModels
             }
             finally
             {
+                IsBusy = false;
             }
         }
 
@@ -105,7 +113,8 @@ namespace BookLibrary.ViewModels
             {
                 Books.Clear();
 
-                List<Book> books = await App.Database.SearchBooksAsync(SearchText);
+                List<Book> books = await App.BookRepository.Get<Book>(x => x.Title.ToLower().Contains(SearchText.ToLower())
+                || x.Author.ToLower().Contains(SearchText.ToLower()));
 
                 foreach (Book book in books)
                 {

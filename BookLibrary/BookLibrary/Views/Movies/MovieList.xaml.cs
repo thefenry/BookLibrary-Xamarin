@@ -1,40 +1,39 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace BookLibrary.Views
+namespace BookLibrary.Views.Movies
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BookList : ContentPage
+    public partial class MovieList : ContentPage
     {
-        BooksViewModel booksViewModel;
+        MoviesViewModel moviesViewModel;
         public bool showFilter = true;
 
-        public BookList()
+        public MovieList()
         {
             InitializeComponent();
 
-            BindingContext = booksViewModel = new BooksViewModel();
+            BindingContext = moviesViewModel = new MoviesViewModel();
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            Book item = args.SelectedItem as Book;
+            Movie item = args.SelectedItem as Movie;
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new BookDetailPage(item));
+            await Navigation.PushAsync(new MovieDetailPage(item));
 
             // Manually deselect item.
-            BooksListView.SelectedItem = null;
+            MoviesListView.SelectedItem = null;
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new AddBook()));
+            await Navigation.PushModalAsync(new NavigationPage(new AddMovie()));
         }
 
         public async void Sort_Clicked(object sender, EventArgs e)
@@ -43,7 +42,7 @@ namespace BookLibrary.Views
 
             if (action != "Cancel")
             {
-                booksViewModel.ExecuteSortBooksCommand(action);
+                moviesViewModel.ExecuteSortMoviesCommand(action);
             }
 
             SortLabel.Text = $"Sorted by: {action}";
@@ -51,13 +50,14 @@ namespace BookLibrary.Views
 
         public void Search_Clicked(object sender, EventArgs e)
         {
-            BookSearch.IsVisible = !BookSearch.IsVisible;
+            MovieSearch.IsVisible = !MovieSearch.IsVisible;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Task.Run(() => booksViewModel.LoadBooksCommand.Execute(null));
+
+            moviesViewModel.LoadMoviesCommand.Execute(null);
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -67,14 +67,17 @@ namespace BookLibrary.Views
 
             if (string.IsNullOrEmpty(searchText))
             {
-                booksViewModel.LoadBooksCommand.Execute(null);
+                moviesViewModel.LoadMoviesCommand.Execute(null);
+
             }
 
             else
             {
-                booksViewModel.SearchText = searchText;
-                booksViewModel.SearchBooksCommand.Execute(null);
+                moviesViewModel.SearchText = searchText;
+                moviesViewModel.SearchMoviesCommand.Execute(null);
+
             }
         }
+
     }
 }
