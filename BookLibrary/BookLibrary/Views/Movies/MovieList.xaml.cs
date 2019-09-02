@@ -38,7 +38,7 @@ namespace BookLibrary.Views.Movies
 
         public async void Sort_Clicked(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Sort By: ", "Cancel", null, "Author", "Title", "Series");
+            string action = await DisplayActionSheet("Sort By: ", "Cancel", null, "Year", "Title", "Genre");
 
             if (action != "Cancel")
             {
