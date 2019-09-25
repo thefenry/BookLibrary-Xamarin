@@ -47,7 +47,7 @@ namespace BookLibrary.ViewModels
                 {
 
                     Movie _movie = movie as Movie;
-                    if (_movie.Id == 0)
+                    if (_movie.MovieId == 0)
                     {
                         await App.MoviesRepository.Insert(_movie);
                     }
