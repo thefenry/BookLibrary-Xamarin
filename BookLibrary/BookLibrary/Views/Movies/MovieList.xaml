@@ -30,7 +30,7 @@
                   HasUnevenRows="true" 
                   RefreshCommand="{Binding LoadMoviesCommand}" 
                   IsPullToRefreshEnabled="true" 
-                  IsRefreshing="{Binding IsBusy, Mode=OneWay }"
+                  IsRefreshing="{Binding IsLoadingMovies, Mode=OneWay }"
                   CachingStrategy="RecycleElement"
                   ItemSelected="OnItemSelected">
 

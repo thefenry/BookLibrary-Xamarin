@@ -18,7 +18,7 @@ namespace BookLibrary.Views.Movies
 
             BindingContext = moviesViewModel = new MoviesViewModel();
         }
-
+        
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             Movie item = args.SelectedItem as Movie;
@@ -55,9 +55,9 @@ namespace BookLibrary.Views.Movies
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
             moviesViewModel.LoadMoviesCommand.Execute(null);
+            moviesViewModel.IsLoadingMovies = false;
+            base.OnAppearing();
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
