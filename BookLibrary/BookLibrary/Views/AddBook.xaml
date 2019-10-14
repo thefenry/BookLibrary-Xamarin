@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:xfx="clr-namespace:Xfx;assembly=Xfx.Controls"
              BackgroundColor="{StaticResource backgroundColor}"             
              x:Class="BookLibrary.Views.AddBook"
              Title="Add Book">
@@ -12,30 +11,25 @@
         <ScrollView>
             <StackLayout Spacing="0">
 
-                <!--<Label Text="Tile" />-->
-                <xfx:XfxEntry Placeholder="Enter Book Title" Text="{Binding Book.Title}" 
-                              TextColor="{StaticResource textColor}" PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}" />
+                <Entry Placeholder="Enter Book Title" Text="{Binding Book.Title}" 
+                              TextColor="{StaticResource textColor}" PlaceholderColor="{StaticResource textColor}" Margin="5, 10, 5, 10"></Entry>
 
-                <!--<Label Text="Author" />-->
-                <xfx:XfxEntry Placeholder="Author" Text="{Binding Book.Author}" TextColor="{StaticResource textColor}" 
-                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
+                <Entry Placeholder="Author" Text="{Binding Book.Author}" TextColor="{StaticResource textColor}" 
+                              PlaceholderColor="{StaticResource textColor}" Margin="5, 10, 5, 10"></Entry>
 
-                <!--<Label Text="Series" />-->
-                <xfx:XfxEntry Placeholder="Series" Text="{Binding Book.Series}" TextColor="{StaticResource textColor}" 
-                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
-           
-                <!--<Label Text="Description" />-->
-                <xfx:XfxEntry Placeholder="Description" Text="{Binding Book.Description}" TextColor="{StaticResource textColor}" 
-                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
-               
-                <!--<Label Text="Genre" />-->
-                <xfx:XfxEntry Placeholder="Genre" Text="{Binding Book.Genre}" TextColor="{StaticResource textColor}" 
-                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
+                <Entry Placeholder="Series" Text="{Binding Book.Series}" TextColor="{StaticResource textColor}" 
+                              PlaceholderColor="{StaticResource textColor}" Margin="5, 10, 5, 10"></Entry>
 
-                <xfx:XfxEntry Placeholder="Category" Text="{Binding Book.Category}" TextColor="{StaticResource textColor}"
-                              PlaceholderColor="{StaticResource textColor}" ActivePlaceholderColor="{StaticResource textColor}"/>
+                <Entry Placeholder="Description" Text="{Binding Book.Description}" TextColor="{StaticResource textColor}" 
+                              PlaceholderColor="{StaticResource textColor}" Margin="5, 10, 5, 10"></Entry>
 
-                <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Genre" Text="{Binding Book.Genre}" TextColor="{StaticResource textColor}" 
+                              PlaceholderColor="{StaticResource textColor}" Margin="5, 10, 5, 10"></Entry>
+
+                <Entry Placeholder="Category" Text="{Binding Book.Category}" TextColor="{StaticResource textColor}"
+                              PlaceholderColor="{StaticResource textColor}" Margin="5, 10, 5, 10"></Entry>
+
+                <StackLayout Orientation="Horizontal" Margin="5, 10, 5, 10">
                     <Label Text="EBook:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
                     <!--<Entry Text="{Binding Book.IsEBook}"/>-->
                     <Switch IsToggled="{Binding Book.IsEBook}"></Switch>

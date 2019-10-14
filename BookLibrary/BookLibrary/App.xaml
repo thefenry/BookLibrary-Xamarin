@@ -8,7 +8,8 @@
         <ResourceDictionary>
             <Color x:Key="backgroundColor">#353233</Color>
             <Color x:Key="textColor">White</Color>
-            <Color x:Key="oppositeBackgroundColor">#A4999C</Color>
+            <Color x:Key="oppositeBackgroundColor">#996699</Color>
+            <Color x:Key="blueColor">#006699</Color>
         </ResourceDictionary>
 
     </Application.Resources>

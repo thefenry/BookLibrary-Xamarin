@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BookLibrary.Views.BookList"        
+             x:Class="BookLibrary.Views.BookList" 
+             Title="Books"
              BackgroundColor="{StaticResource backgroundColor}"
              >
 
@@ -12,7 +13,7 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout Orientation="Vertical" >
-        <StackLayout Padding="10, 5" BackgroundColor="{StaticResource oppositeBackgroundColor}">
+        <StackLayout Padding="10, 5" BackgroundColor="{StaticResource blueColor}">
             <Label x:Name="SortLabel" TextColor="{StaticResource textColor}" >Sorted by: Series</Label>
 
             <SearchBar x:Name="BookSearch" TextChanged="SearchBar_TextChanged" 
