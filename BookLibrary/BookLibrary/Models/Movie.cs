@@ -2,10 +2,11 @@
 
 namespace BookLibrary.Models
 {
+    [Table("Movies")]
     public class Movie
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int MovieId { get; set; }
 
         public string Title { get; set; }
 

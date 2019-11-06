@@ -1,5 +1,4 @@
-﻿using BookLibrary.DAL;
-using BookLibrary.Models;
+﻿using BookLibrary.Models;
 using BookLibrary.Views.Movies;
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,12 @@ namespace BookLibrary.ViewModels
 
         //public ILibraryRepository<Item> DataStore => DependencyService.Get<ILibraryRepository<Item>>() ?? new LibraryRepository();
 
+        bool isLoadingMovies = false;
+        public bool IsLoadingMovies
+        {
+            get { return isLoadingMovies; }
+            set { SetProperty(ref isLoadingMovies, value); }
+        }
 
         public string SearchText { get; set; }
 
@@ -47,7 +52,7 @@ namespace BookLibrary.ViewModels
                 {
 
                     Movie _movie = movie as Movie;
-                    if (_movie.Id == 0)
+                    if (_movie.MovieId == 0)
                     {
                         await App.MoviesRepository.Insert(_movie);
                     }
@@ -61,12 +66,12 @@ namespace BookLibrary.ViewModels
             });
         }
 
-        private async Task ExecuteLoadMoviesCommand()
+        public async Task ExecuteLoadMoviesCommand()
         {
-            if (IsBusy)
+            if (IsLoadingMovies)
                 return;
 
-            IsBusy = true;
+            IsLoadingMovies = true;
 
             try
             {
@@ -82,8 +87,6 @@ namespace BookLibrary.ViewModels
                         Movies.Add(movie);
                     }
                 }
-
-                IsBusy = false;
             }
             catch (Exception ex)
             {
@@ -91,15 +94,16 @@ namespace BookLibrary.ViewModels
             }
             finally
             {
+                IsLoadingMovies = false;
             }
         }
 
         private async Task ExecuteSearchMoviesCommand()
         {
-            if (IsBusy)
+            if (IsLoadingMovies)
                 return;
 
-            IsBusy = true;
+            IsLoadingMovies = true;
 
             try
             {
@@ -122,7 +126,7 @@ namespace BookLibrary.ViewModels
             }
             finally
             {
-                IsBusy = false;
+                IsLoadingMovies = false;
             }
         }
 
