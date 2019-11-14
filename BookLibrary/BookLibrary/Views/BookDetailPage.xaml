@@ -20,7 +20,7 @@
                 <Label Text="{Binding Book.Genre}" FontSize="Small" TextColor="{StaticResource textColor}"/>
                 <Label Text="Category:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
                 <Label Text="{Binding Book.Category}" FontSize="Small" TextColor="{StaticResource textColor}"/>
-                <Label Text="EBook:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
+                <Label Text="Is EBook:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
                 <Label Text="{Binding Book.IsEBook}" FontSize="Small" TextColor="{StaticResource textColor}"/>
             </StackLayout>
         </ScrollView>
