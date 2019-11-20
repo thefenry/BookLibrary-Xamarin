@@ -1,6 +1,5 @@
 ﻿using BookLibrary.Models;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,24 +13,33 @@ namespace BookLibrary.Services
 
         public async Task<string> GetExportLibraryContentAsync()
         {
-            List<Book> books = await App.BookRepository.Get();
+            var exportObject = new ImportExportObject
+            {
+                Books = await App.BookRepository.Get(),
+                Movies = await App.MoviesRepository.Get()
+            };
 
-            return JsonConvert.SerializeObject(books, Formatting.Indented);
+            return JsonConvert.SerializeObject(exportObject, Formatting.Indented);
         }
 
         public async Task<int> ImportBooksAsync(byte[] dataArray)
         {
             string contents = System.Text.Encoding.UTF8.GetString(dataArray);
-            List<Book> booksList = JsonConvert.DeserializeObject<List<Book>>(contents);
+            ImportExportObject importObject = JsonConvert.DeserializeObject<ImportExportObject>(contents);
 
-            foreach (var book in booksList)
+            foreach (var book in importObject.Books)
             {
                 await App.BookRepository.Insert(book);
             }
 
-            MessagingCenter.Send(this, "Addbooks", booksList);
+            foreach (var movie in importObject.Movies)
+            {
+                await App.MoviesRepository.Insert(movie);
+            }
 
-            return booksList.Count;
+            MessagingCenter.Send(this, "Addbooks", importObject.Books);
+
+            return importObject.Books.Count;
         }
     }
 }
