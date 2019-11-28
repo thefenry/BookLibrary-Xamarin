@@ -30,8 +30,8 @@ namespace BookLibrary.Views
         {
             try
             {
-                string[] acceptedFileTypes = new[] { "application/json" };
-                FileData fileData = await CrossFilePicker.Current.PickFile(acceptedFileTypes);
+                //string[] acceptedFileTypes = new[] { "application/json" };
+                FileData fileData = await CrossFilePicker.Current.PickFile();
                 if (fileData == null)
                     return; // user canceled file picking
 

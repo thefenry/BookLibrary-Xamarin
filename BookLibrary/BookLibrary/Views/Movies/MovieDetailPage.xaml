@@ -17,6 +17,8 @@
                 <Label Text="{Binding Movie.MovieType}" FontSize="Small" TextColor="{StaticResource textColor}"/>
                 <Label Text="Year:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
                 <Label Text="{Binding Movie.Year}" FontSize="Small" TextColor="{StaticResource textColor}"/>
+                <Label Text="Is Steelbook:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
+                <Label Text="{Binding SteelbookString}" FontSize="Small" TextColor="{StaticResource textColor}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

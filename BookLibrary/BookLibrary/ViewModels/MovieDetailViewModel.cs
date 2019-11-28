@@ -13,10 +13,17 @@ namespace MovieLibrary.ViewModels
             get => movie;
             set
             {
-                SetProperty(ref movie, value);                
+                SetProperty(ref movie, value);
             }
         }
 
+        public string SteelbookString
+        {
+            get
+            {
+                return movie.IsSteelBook ? "Yes" : "No";
+            }
+        }
 
         public MovieDetailViewModel(Movie movie = null)
         {

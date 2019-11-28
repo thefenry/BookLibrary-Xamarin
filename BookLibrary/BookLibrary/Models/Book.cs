@@ -10,7 +10,7 @@ namespace BookLibrary.Models
         /// DO NOT CHNAGE THIS!!!!!! THE DB DOES NOT LIKE IT
         /// </summary>
         [PrimaryKey, AutoIncrement]
-        public int Id { get; internal set; } ///
+        public int Id { get; set; } ///
 
         public string Title { get; set; }
 
