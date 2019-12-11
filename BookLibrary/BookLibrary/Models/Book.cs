@@ -3,14 +3,14 @@ using SQLite;
 
 namespace BookLibrary.Models
 {
-    [Table("Books")]
+    //[Table("Books")]
     public class Book
     {
         /// <summary>
         /// DO NOT CHNAGE THIS!!!!!! THE DB DOES NOT LIKE IT
         /// </summary>
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; } ///
+        public int Id { get; set; }
 
         public string Title { get; set; }
 

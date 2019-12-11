@@ -25,7 +25,9 @@ namespace BookLibrary.DAL
 
         public LibraryRepository(SQLiteAsyncConnection db)
         {
+            //database = new SQLiteAsyncConnection(dbPath);
             this.db = db;
+            this.db.CreateTableAsync<T>().Wait();
         }
 
         public AsyncTableQuery<T> AsQueryable()

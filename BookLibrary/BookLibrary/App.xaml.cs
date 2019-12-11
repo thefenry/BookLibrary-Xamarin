@@ -19,7 +19,7 @@ namespace BookLibrary
 
             string dbPath = DependencyService.Get<IFileHelper>().GetLocalFilePath("BookSQLite.db3");
             database = new SQLiteAsyncConnection(dbPath);
-            database.CreateTablesAsync<Book, Movie>().Wait();
+            //database.CreateTablesAsync<Book, Movie>().Wait();
 
             MainPage = new MainPage();// NavigationPage(new BookLibrary.Views.BookList());//.MainTabPage();
         }

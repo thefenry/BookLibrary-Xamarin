@@ -2,7 +2,7 @@
 
 namespace BookLibrary.Models
 {
-    [Table("Movies")]
+    //[Table("Movies")]
     public class Movie
     {
         [PrimaryKey, AutoIncrement]
