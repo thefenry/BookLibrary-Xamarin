@@ -2,7 +2,6 @@
 using BookLibrary.Services;
 using BookLibrary.ViewModels;
 using System;
-using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -35,7 +34,7 @@ namespace BookLibrary.Views
             try
             {
                 var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-
+                scanner.Torch(true);
                 var result = await scanner.Scan();
 
                 if (result != null)
@@ -43,14 +42,22 @@ namespace BookLibrary.Views
                     Console.WriteLine("Scanned Barcode: " + result.Text);
 
                     var service = new GoogleBooksService();
-                    this._book.Book = await service.GetBookAsync(result.Text);
+                    var bookResult = await service.GetBookAsync(result.Text);
+                    if (bookResult == null)
+                    {
+                        await DisplayAlert("Could not find Book", "Could not find book. Please check the barcode and try again.", "OK");
+                    }
+                    else
+                    {
+                        this._book.Book = bookResult;
+                    }
                 }
-
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error Occured", "An Error occured while scanning. Try again later.", "Ok");
                 Log.Warning("Scanner", ex.Message);
+                throw new Exception(ex.Message, ex);
             }
 
         }
