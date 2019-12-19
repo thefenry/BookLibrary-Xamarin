@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BookLibrary.CustomControls.RatingBar"
              x:Class="BookLibrary.Views.BookDetailPage"
              BackgroundColor="{StaticResource backgroundColor}"
              Title="Book Details">
@@ -22,6 +23,8 @@
                 <Label Text="{Binding Book.Category}" FontSize="Small" TextColor="{StaticResource textColor}"/>
                 <Label Text="Is EBook:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
                 <Label Text="{Binding Book.IsEBook}" FontSize="Small" TextColor="{StaticResource textColor}"/>
+                <local:RatingSlider x:Name="positionSlider" HorizontalOptions="FillAndExpand" ItemSpacing="5" 
+                                    NumberOfItems="5" SelectedPosition="{Binding Book.Rating, Mode=TwoWay}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
