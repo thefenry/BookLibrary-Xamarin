@@ -26,5 +26,7 @@ namespace BookLibrary.Models
         public string Category { get; set; }
 
         public bool IsEBook { get; set; }
+
+        public int Rating { get; set; }
     }
 }

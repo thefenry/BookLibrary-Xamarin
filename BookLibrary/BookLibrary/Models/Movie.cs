@@ -55,5 +55,7 @@ namespace BookLibrary.Models
         }
 
         public bool IsSteelBook { get; set; }
+
+        public int Rating { get; set; }
     }
 }
