@@ -1,7 +1,6 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.ViewModels;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +10,6 @@ namespace BookLibrary.Views
 	public partial class BookDetailPage : ContentPage
 	{
         BookDetailViewModel _book;
-        //BookDetailViewModel viewModel;
 
         public BookDetailPage (Book book)
 		{
@@ -30,12 +28,6 @@ namespace BookLibrary.Views
         {
             await App.BookRepository.Delete(this._book.Book);
             await Navigation.PopToRootAsync();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
+        }        
     }
 }

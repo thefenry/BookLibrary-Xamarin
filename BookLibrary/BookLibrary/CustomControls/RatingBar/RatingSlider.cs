@@ -60,6 +60,23 @@ namespace BookLibrary.CustomControls.RatingBar
             set { SetValue(ItemSelectedColorProperty, value); }
         }
 
+        public static readonly BindableProperty LowItemSelectedColorProperty = BindableProperty.Create(nameof(LowItemSelectedColor), typeof(Color), typeof(RatingSlider), Color.DarkRed);
+
+        public Color LowItemSelectedColor
+        {
+            get { return (Color)GetValue(LowItemSelectedColorProperty); }
+            set { SetValue(LowItemSelectedColorProperty, value); }
+        }
+
+        public static readonly BindableProperty MediumItemSelectedColorProperty = BindableProperty.Create(nameof(MediumItemSelectedColor), typeof(Color), typeof(RatingSlider), Color.Yellow);
+
+        public Color MediumItemSelectedColor
+        {
+            get { return (Color)GetValue(MediumItemSelectedColorProperty); }
+            set { SetValue(MediumItemSelectedColorProperty, value); }
+        }
+
+
         public static readonly BindableProperty ItemUnselectedColorProperty = BindableProperty.Create(nameof(ItemUnselectedColor), typeof(Color), typeof(RatingSlider), Color.Gray);
 
         public Color ItemUnselectedColor
@@ -130,11 +147,21 @@ namespace BookLibrary.CustomControls.RatingBar
         {
             if (SelectedPosition >= 1 && boxes.Count >= SelectedPosition)
             {
+                var selectedColor = MediumItemSelectedColor;
+                if ((double)SelectedPosition / boxes.Count <= .25)
+                {
+                    selectedColor = LowItemSelectedColor;
+                }
+                else if ((double)SelectedPosition / boxes.Count > .8)
+                {
+                    selectedColor = ItemSelectedColor;
+                }
+
                 for (int p = 0; p < boxes.Count; p++)
                 {
                     if ((p + 1) <= SelectedPosition)
                     {
-                        boxes[p].BackgroundColor = ItemSelectedColor;
+                        boxes[p].BackgroundColor = selectedColor;
                     }
                     else
                     {
