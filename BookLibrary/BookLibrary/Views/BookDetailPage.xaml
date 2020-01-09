@@ -23,7 +23,7 @@
                 <Label Text="{Binding Book.Category}" FontSize="Small" TextColor="{StaticResource textColor}"/>
                 <Label Text="Is EBook:" FontSize="Medium" TextColor="{StaticResource textColor}"/>
                 <Label Text="{Binding Book.IsEBook}" FontSize="Small" TextColor="{StaticResource textColor}"/>
-                <local:RatingSlider x:Name="positionSlider" HorizontalOptions="FillAndExpand" ItemSpacing="5" 
+                <local:RatingSlider x:Name="positionSlider" HorizontalOptions="FillAndExpand" ItemSpacing="5" Margin="0, 15, 0, 0"
                                     NumberOfItems="5" SelectedPosition="{Binding Book.Rating, Mode=TwoWay}" />
             </StackLayout>
         </ScrollView>
