@@ -13,27 +13,28 @@ namespace BookLibrary.Services
             GoogleBookRepository googleBookRepository = new GoogleBookRepository();
 
             BookResult bookResult = await googleBookRepository.GetBookByISBNAsync(isbn);
-            if (bookResult == null)
+
+            if (bookResult?.Items?.Count > 0)
             {
-                return null;
+                Item book = bookResult.Items.First();
+
+                return new Book
+                {
+                    Author = SetAuthor(book),
+
+                    Title = SetTitle(book),
+
+                    Description = SetDescription(book),
+
+                    IsEBook = SetIsEbook(book),
+
+                    Category = SetCategory(book)
+                };
             }
 
-            Item book = bookResult.Items.First();
-
-            return new Book
-            {
-                Author = SetAuthor(book),
-
-                Title = SetTitle(book),
-
-                Description = SetDescription(book),
-
-                IsEBook = SetIsEbook(book),
-
-                Category = SetCategory(book)
-            };
+            return null;
         }
-        
+
         private string SetAuthor(Item book)
         {
             if (book.VolumeInfo == null && book.VolumeInfo.Authors == null)

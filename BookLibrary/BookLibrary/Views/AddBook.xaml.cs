@@ -17,7 +17,7 @@ namespace BookLibrary.Views
         {
             InitializeComponent();
 
-            Book editingBook = book == null ? new Book() : book;
+            Book editingBook = book ?? new Book();
             this._book = new BookDetailViewModel(editingBook);
 
             BindingContext = this._book;
@@ -33,16 +33,16 @@ namespace BookLibrary.Views
         {
             try
             {
-                var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+                ZXing.Mobile.MobileBarcodeScanner scanner = new ZXing.Mobile.MobileBarcodeScanner();
                 scanner.Torch(true);
-                var result = await scanner.Scan();
+                ZXing.Result result = await scanner.Scan();
 
                 if (result != null)
                 {
                     Console.WriteLine("Scanned Barcode: " + result.Text);
 
-                    var service = new GoogleBooksService();
-                    var bookResult = await service.GetBookAsync(result.Text);
+                    GoogleBooksService service = new GoogleBooksService();
+                    Book bookResult = await service.GetBookAsync(result.Text);
                     if (bookResult == null)
                     {
                         await DisplayAlert("Could not find Book", "Could not find book. Please check the barcode and try again.", "OK");
