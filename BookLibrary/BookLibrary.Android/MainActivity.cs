@@ -3,7 +3,6 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Plugin.Permissions;
-//using Xfx;
 
 namespace BookLibrary.Droid
 {
@@ -16,11 +15,10 @@ namespace BookLibrary.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            //XfxControls.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             // This line is leveraging the android-specific implementation
-            ZXing.Mobile.MobileBarcodeScanner.Initialize(Application);
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
             LoadApplication(new App());
         }

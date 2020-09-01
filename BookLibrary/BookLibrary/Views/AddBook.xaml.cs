@@ -5,6 +5,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+using ZXing.Net.Mobile.Forms;
 
 namespace BookLibrary.Views
 {
@@ -12,11 +13,11 @@ namespace BookLibrary.Views
     public partial class AddBook : ContentPage
     {
         public BookDetailViewModel _book;
+        private GoogleBooksService googleService = new GoogleBooksService();
 
         public AddBook(Book book = null)
         {
             InitializeComponent();
-
             Book editingBook = book ?? new Book();
             this._book = new BookDetailViewModel(editingBook);
 
@@ -33,25 +34,27 @@ namespace BookLibrary.Views
         {
             try
             {
-                ZXing.Mobile.MobileBarcodeScanner scanner = new ZXing.Mobile.MobileBarcodeScanner();
-                scanner.Torch(true);
-                ZXing.Result result = await scanner.Scan();
-
-                if (result != null)
+                string isbn = string.Empty;
+                ZXingScannerPage scan = new ZXingScannerPage();
+                await Navigation.PushAsync(scan);
+                scan.OnScanResult += (result) =>
                 {
-                    Console.WriteLine("Scanned Barcode: " + result.Text);
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Navigation.PopAsync();
+                        isbn = result.Text;
 
-                    GoogleBooksService service = new GoogleBooksService();
-                    Book bookResult = await service.GetBookAsync(result.Text);
-                    if (bookResult == null)
-                    {
-                        await DisplayAlert("Could not find Book", "Could not find book. Please check the barcode and try again.", "OK");
-                    }
-                    else
-                    {
-                        this._book.Book = bookResult;
-                    }
-                }
+                        Book bookResult = await googleService.GetBookAsync(isbn);
+                        if (bookResult == null)
+                        {
+                            await DisplayAlert("Could not find Book", "Could not find book. Please check the barcode and try again.", "OK");
+                        }
+                        else
+                        {
+                            this._book.Book = bookResult;
+                        }
+                    });
+                };
             }
             catch (Exception ex)
             {

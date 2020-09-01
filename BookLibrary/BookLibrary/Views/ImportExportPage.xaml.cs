@@ -16,9 +16,9 @@ namespace BookLibrary.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        private ImportExportService _importExportService;
+        private readonly ImportExportService _importExportService;
 
-        private List<string> acceptedExtensions = new List<string> { "json" };
+        private readonly List<string> acceptedExtensions = new List<string> { "json" };
 
         public SettingsPage()
         {
