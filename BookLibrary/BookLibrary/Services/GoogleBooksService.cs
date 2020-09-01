@@ -7,11 +7,9 @@ namespace BookLibrary.Services
 {
     public class GoogleBooksService
     {
+        GoogleBookRepository googleBookRepository = new GoogleBookRepository();
         public async Task<Book> GetBookAsync(string isbn)
         {
-
-            GoogleBookRepository googleBookRepository = new GoogleBookRepository();
-
             BookResult bookResult = await googleBookRepository.GetBookByISBNAsync(isbn);
 
             if (bookResult?.Items?.Count > 0)
@@ -94,5 +92,27 @@ namespace BookLibrary.Services
                 return string.Join(",", book.VolumeInfo.Categories);
             }
         }
+
+        //public void Dispose()
+        //{
+        //    Dispose(true);            
+        //    GC.SuppressFinalize(this);
+        //}
+
+        //private bool isDisposed;
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (isDisposed)
+        //    {
+        //        return;
+        //    }
+
+        //    if (disposing)
+        //    {
+        //        //googleBookRepository.Dispose();
+        //    }
+
+        //    isDisposed = true;
+        //}
     }
 }
