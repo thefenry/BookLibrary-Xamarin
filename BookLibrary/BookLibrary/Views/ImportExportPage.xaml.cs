@@ -1,13 +1,13 @@
-﻿using BookLibrary.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using BookLibrary.Helpers;
 using BookLibrary.Interfaces;
 using BookLibrary.Services;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -63,8 +63,16 @@ namespace BookLibrary.Views
         {
             try
             {
-                PermissionStatus status = PermissionStatus.Unknown;
-                status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+                PermissionStatus status = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
+                if (status != PermissionStatus.Granted)
+                {
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Storage))
+                    {
+                        await DisplayAlert("Need Storage Access", "We need to get storage permission in order to backup your files", "OK");
+                    }
+
+                    status = await CrossPermissions.Current.RequestPermissionAsync<LocationPermission>();
+                }
 
                 if (status != PermissionStatus.Granted)
                 {
