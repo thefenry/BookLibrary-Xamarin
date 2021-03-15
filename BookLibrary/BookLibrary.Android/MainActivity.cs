@@ -2,7 +2,6 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Plugin.Permissions;
 
 namespace BookLibrary.Droid
 {
@@ -20,12 +19,16 @@ namespace BookLibrary.Droid
             // This line is leveraging the android-specific implementation
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
+            Xamarin.Essentials.Platform.Init(this, bundle);
+
             LoadApplication(new App());
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
-            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
