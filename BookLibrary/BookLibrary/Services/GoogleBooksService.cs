@@ -35,7 +35,7 @@ namespace BookLibrary.Services
 
         private string SetAuthor(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Authors == null)
+            if (book?.VolumeInfo?.Authors == null)
             {
                 return null;
             }
@@ -47,7 +47,7 @@ namespace BookLibrary.Services
 
         private string SetTitle(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Title == null)
+            if (book?.VolumeInfo?.Title == null)
             {
                 return null;
             }
@@ -59,7 +59,7 @@ namespace BookLibrary.Services
 
         private string SetDescription(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Description == null)
+            if (book?.VolumeInfo?.Description == null)
             {
                 return null;
             }
@@ -83,7 +83,7 @@ namespace BookLibrary.Services
 
         private string SetCategory(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Categories == null)
+            if (book?.VolumeInfo?.Categories == null)
             {
                 return null;
             }
