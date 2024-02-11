@@ -1,24 +1,24 @@
-﻿using BookLibrary.Helpers;
-using BookLibrary.Interfaces;
-using BookLibrary.Services;
-using Plugin.FilePicker;
-using Plugin.FilePicker.Abstractions;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using BookLibrary.Helpers;
+using BookLibrary.Interfaces;
+using BookLibrary.Services;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace BookLibrary.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        private ImportExportService _importExportService;
+        private readonly ImportExportService _importExportService;
 
-        private List<string> acceptedExtensions = new List<string> { "json" };
+        private readonly List<string> acceptedExtensions = new List<string> { "json" };
 
         public SettingsPage()
         {
@@ -30,26 +30,44 @@ namespace BookLibrary.Views
         {
             try
             {
+                // TODO: Impletement the pick options
                 //string[] acceptedFileTypes = new[] { "application/json" };
-                FileData fileData = await CrossFilePicker.Current.PickFile();
-                if (fileData == null)
-                    return; // user canceled file picking
+                //PickOptions options = new PickOptions
+                //{
+                //    FileTypes = new FilePickerFileType(
+                //        new Dictionary<DevicePlatform, IEnumerable<string>>
+                //        {
+                //            { DevicePlatform.Android, new string[] { ".json" } },
+                //            { DevicePlatform.iOS, new string[] { ".json" } },
+                //            { DevicePlatform.UWP, new string[] { ".json" } },
+                //        }),
+                //        PickerTitle = "Select a file to import"
+                //};
 
-                string fileName = fileData.FileName;
-                string[] fileNameArray = fileName.Split('.');
+                FileResult fileData = await FilePicker.PickAsync();
 
-                if (IsValidFormat(fileNameArray))
+                if (fileData != null)
                 {
-                    int bookCount = await _importExportService.ImportBooksAsync(fileData.DataArray);
+                    string[] fileNameArray = fileData.FileName.Split('.');
 
-                    await DisplayAlert("Horray!", $"You just added {bookCount} books", "Great");
-                }
-                else
-                {
-                    await DisplayAlert("Panic!", $"I'm sorry but we currently only support {string.Join(", ", acceptedExtensions)} " +
-                        $"files. Please try again with a different file", "Ok");
-                }
+                    if (IsValidFormat(fileNameArray))
+                    {
+                        Stream stream = await fileData.OpenReadAsync();
+                        using (StreamReader streamReader = new StreamReader(stream))
+                        {
+                            string content = await streamReader.ReadToEndAsync();
 
+                            int bookCount = await _importExportService.ImportBooksAsync(content);
+
+                            await DisplayAlert("Horray!", $"You just added {bookCount} books", "Great");
+                        }                      
+                    }
+                    else
+                    {
+                        await DisplayAlert("Panic!", $"I'm sorry but we currently only support {string.Join(", ", acceptedExtensions)} " +
+                            $"files. Please try again with a different file", "Ok");
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -63,8 +81,16 @@ namespace BookLibrary.Views
         {
             try
             {
-                PermissionStatus status = PermissionStatus.Unknown;
-                status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+                PermissionStatus status = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
+                if (status != PermissionStatus.Granted)
+                {
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Storage))
+                    {
+                        await DisplayAlert("Need Storage Access", "We need to get storage permission in order to backup your files", "OK");
+                    }
+
+                    status = await CrossPermissions.Current.RequestPermissionAsync<LocationPermission>();
+                }
 
                 if (status != PermissionStatus.Granted)
                 {

@@ -7,11 +7,9 @@ namespace BookLibrary.Services
 {
     public class GoogleBooksService
     {
+        GoogleBookRepository googleBookRepository = new GoogleBookRepository();
         public async Task<Book> GetBookAsync(string isbn)
         {
-
-            GoogleBookRepository googleBookRepository = new GoogleBookRepository();
-
             BookResult bookResult = await googleBookRepository.GetBookByISBNAsync(isbn);
 
             if (bookResult?.Items?.Count > 0)
@@ -37,7 +35,7 @@ namespace BookLibrary.Services
 
         private string SetAuthor(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Authors == null)
+            if (book?.VolumeInfo?.Authors == null)
             {
                 return null;
             }
@@ -49,7 +47,7 @@ namespace BookLibrary.Services
 
         private string SetTitle(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Title == null)
+            if (book?.VolumeInfo?.Title == null)
             {
                 return null;
             }
@@ -61,7 +59,7 @@ namespace BookLibrary.Services
 
         private string SetDescription(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Description == null)
+            if (book?.VolumeInfo?.Description == null)
             {
                 return null;
             }
@@ -85,7 +83,7 @@ namespace BookLibrary.Services
 
         private string SetCategory(Item book)
         {
-            if (book.VolumeInfo == null && book.VolumeInfo.Categories == null)
+            if (book?.VolumeInfo?.Categories == null)
             {
                 return null;
             }
@@ -94,5 +92,27 @@ namespace BookLibrary.Services
                 return string.Join(",", book.VolumeInfo.Categories);
             }
         }
+
+        //public void Dispose()
+        //{
+        //    Dispose(true);            
+        //    GC.SuppressFinalize(this);
+        //}
+
+        //private bool isDisposed;
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (isDisposed)
+        //    {
+        //        return;
+        //    }
+
+        //    if (disposing)
+        //    {
+        //        //googleBookRepository.Dispose();
+        //    }
+
+        //    isDisposed = true;
+        //}
     }
 }
